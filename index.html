@@ -8,25 +8,29 @@
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
         :root {
-            --bg-deep: #08090a;
-            --bg-panel: #0f1011;
-            --bg-elevated: #191a1b;
-            --bg-card: rgba(255,255,255,0.025);
-            --bg-card-hover: rgba(255,255,255,0.05);
-            --bg-button: rgba(255,255,255,0.04);
-            --bg-tag: rgba(255,255,255,0.05);
-            --text-primary: #f7f8f8;
-            --text-secondary: #d0d6e0;
-            --text-tertiary: #8a8f98;
-            --text-quaternary: #62666d;
-            --accent: #5e6ad2;
-            --accent-bright: #7170ff;
-            --success: #10b981; --success-bg: rgba(16,185,129,0.1); --success-bd: rgba(16,185,129,0.2);
+            --bg-deep: #060d16;
+            --bg-panel: #0d1520;
+            --bg-elevated: #141d2a;
+            --bg-card: rgba(56,192,224,0.02);
+            --bg-card-hover: rgba(56,192,224,0.05);
+            --bg-button: rgba(56,192,224,0.04);
+            --bg-tag: rgba(56,192,224,0.05);
+            --text-primary: #e8ecf0;
+            --text-secondary: #bcc8d4;
+            --text-tertiary: #7a8594;
+            --text-quaternary: #5a6474;
+            --accent: #38c0e0;
+            --accent-hover: #40d0e0;
+            --accent-dark: #2090c0;
+            --accent-bg: rgba(56,192,224,0.1);
+            --accent-bd: rgba(56,192,224,0.2);
+            --accent-glow: rgba(56,192,224,0.15);
+            --success: #38c0e0; --success-bg: rgba(56,192,224,0.1); --success-bd: rgba(56,192,224,0.2);
             --warning: #f59e0b; --warning-bg: rgba(245,158,11,0.1); --warning-bd: rgba(245,158,11,0.2);
             --danger: #ef4444;  --danger-bg: rgba(239,68,68,0.1);  --danger-bd: rgba(239,68,68,0.2);
-            --info: #3b82f6;    --info-bg: rgba(59,130,246,0.1);   --info-bd: rgba(59,130,246,0.2);
-            --border-std: rgba(255,255,255,0.08);
-            --border-subtle: rgba(255,255,255,0.05);
+            --info: #2080c0;    --info-bg: rgba(32,128,192,0.1);   --info-bd: rgba(32,128,192,0.2);
+            --border-std: rgba(64,192,224,0.08);
+            --border-subtle: rgba(64,192,224,0.05);
             --radius-sm: 4px; --radius-md: 6px; --radius-lg: 10px; --radius-xl: 14px; --radius-pill: 9999px;
             --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -34,10 +38,12 @@
             --max-w: 1280px;
         }
         [data-theme="light"] {
-            --bg-deep: #f5f6f7; --bg-panel: #fff; --bg-elevated: #eeeef0;
-            --bg-card: #fff; --bg-card-hover: #f8f9fa; --bg-button: rgba(0,0,0,0.03); --bg-tag: rgba(0,0,0,0.03);
-            --text-primary: #171717; --text-secondary: #444; --text-tertiary: #666; --text-quaternary: #888;
-            --border-std: rgba(0,0,0,0.1); --border-subtle: rgba(0,0,0,0.06);
+            --bg-deep: #f0f5f8; --bg-panel: #fff; --bg-elevated: #e4eef4;
+            --bg-card: #fff; --bg-card-hover: #f4f8fb; --bg-button: rgba(56,192,224,0.04); --bg-tag: rgba(56,192,224,0.04);
+            --text-primary: #141c24; --text-secondary: #3a4858; --text-tertiary: #5a6878; --text-quaternary: #7a8898;
+            --border-std: rgba(0,0,0,0.08); --border-subtle: rgba(0,0,0,0.05);
+            --accent-bg: rgba(56,192,224,0.08);
+            --accent-bd: rgba(56,192,224,0.18);
         }
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         html{font-size:16px;-webkit-font-smoothing:antialiased}
@@ -51,13 +57,19 @@
         /* HEADER */
         .header{
             position:sticky;top:0;z-index:100;padding:14px 0;
-            background:rgba(8,9,10,.88);backdrop-filter:blur(24px);
+            background:rgba(6,13,22,.88);backdrop-filter:blur(24px);
             border-bottom:1px solid var(--border-subtle);
         }
-        [data-theme="light"] .header{background:rgba(245,246,247,.88)}
+        [data-theme="light"] .header{background:rgba(240,245,248,.88)}
         .header .container{display:flex;align-items:center;justify-content:space-between}
         .header-brand{display:flex;align-items:center;gap:12px}
-        .header-logo{width:32px;height:32px;border-radius:var(--radius-md);background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:14px}
+        .header-logo{
+            width:36px;height:36px;border-radius:var(--radius-md);
+            background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+            display:flex;align-items:center;justify-content:center;overflow:hidden;
+            font-weight:700;font-size:16px;color:#fff;letter-spacing:.5px;
+        }
+        .header-logo img{width:100%;height:100%;object-fit:cover;}
         .header-title{font-size:15px;font-weight:500;color:var(--text-secondary)}
         .header-meta{display:flex;align-items:center;gap:16px}
         .header-date{font-size:14px;color:var(--text-tertiary)}
@@ -81,13 +93,19 @@
         /* HERO */
         .hero{padding:60px 0 36px}
         .hero-label{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;color:var(--text-quaternary);margin-bottom:8px}
-        .hero h1{font-size:40px;font-weight:500;line-height:1.15;letter-spacing:-.9px;color:var(--text-primary)}
+        .hero h1{font-size:40px;font-weight:500;line-height:1.15;letter-spacing:-.9px;color:var(--text-primary);text-shadow:0 0 80px var(--accent-glow)}
         .hero-meta{display:flex;gap:24px;margin-top:12px;font-size:15px;color:var(--text-tertiary);align-items:center}
         .hero-meta .dot{width:7px;height:7px;border-radius:50%}
-        .hero-meta .dot.green{background:var(--success)}
+        .hero-meta .dot.green{background:var(--success);box-shadow:0 0 8px var(--accent-glow)}
 
         /* SECTION — modular card */
-        .section{padding:0 0 48px}
+        .section{padding:0 0 48px;position:relative}
+        .section::after{
+            content:'';display:block;height:1px;margin:0 auto;
+            background:linear-gradient(90deg,transparent,var(--accent-bd),transparent);
+            max-width:600px;position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:100%;
+        }
+        .section:last-of-type::after{display:none}
         .section-card{
             background:var(--bg-card);border:1px solid var(--border-std);
             border-radius:var(--radius-xl);overflow:hidden;
@@ -96,6 +114,12 @@
         .section-card::before{
             content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
         }
+        .section-card::after{
+            content:'◆';position:absolute;top:16px;right:20px;
+            font-size:8px;color:var(--accent);opacity:.25;
+            transition:opacity .3s;
+        }
+        .section-card:hover::after{opacity:.5}
         .section-card.kpi::before{background:var(--accent)}
         .section-card.kt::before{background:var(--info)}
         .section-card.personal::before{background:var(--warning)}
@@ -103,7 +127,7 @@
         .section-inner{padding:36px 32px}
 
         .section-hd{display:flex;align-items:baseline;gap:12px;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border-subtle)}
-        .section-num{font-size:28px;font-weight:600;color:var(--accent);line-height:1;letter-spacing:-1px}
+        .section-num{font-size:28px;font-weight:600;color:var(--accent);line-height:1;letter-spacing:-1px;text-shadow:0 0 20px var(--accent-glow)}
         .section-ttl{font-size:22px;font-weight:600;color:var(--text-primary)}
         .section-desc{font-size:14px;color:var(--text-tertiary);margin-left:auto}
 
@@ -134,10 +158,10 @@
         .kpi-summary{display:flex;gap:24px;margin-top:20px;padding:16px 20px;background:var(--bg-button);border-radius:var(--radius-lg);font-size:13px;flex-wrap:wrap}
         .kpi-summary-item{display:flex;align-items:center;gap:8px}
         .kpi-summary-dot{width:10px;height:10px;border-radius:50%}
-        .kpi-summary-dot.green{background:var(--success)}
+        .kpi-summary-dot.green{background:var(--success);box-shadow:0 0 6px var(--accent-glow)}
         .kpi-summary-dot.amber{background:var(--warning)}
         .kpi-summary-dot.gray{background:var(--text-quaternary)}
-        .kpi-summary strong{font-size:24px;font-weight:600;line-height:1}
+        .kpi-summary strong{font-size:24px;font-weight:600;line-height:1;color:var(--accent)}
 
         /* KT ACCORDION */
         .kt-list{display:flex;flex-direction:column;gap:12px}
@@ -184,10 +208,35 @@
         .ai-block-desc{font-size:14px;color:var(--text-secondary);line-height:1.7}
 
         /* FOOTER */
-        .footer{padding:40px 0 60px;border-top:1px solid var(--border-std);margin-top:16px}
+        .footer{padding:40px 0 60px;border-top:1px solid var(--accent-bd);margin-top:16px}
         .footer-grid{display:flex;justify-content:space-between;gap:24px}
         .footer-col{font-size:14px;color:var(--text-quaternary);line-height:1.7}
         .footer-col strong{color:var(--text-tertiary);font-weight:600}
+        .footer-tagline{text-align:center;margin-top:20px;font-size:12px;color:var(--accent);opacity:.5;letter-spacing:1px;text-transform:uppercase}
+
+        /* CARLCARE BADGES */
+        .c-badge{
+            display:inline-flex;align-items:center;gap:4px;
+            font-size:11px;font-weight:600;color:var(--accent);
+            background:var(--accent-bg);border:1px solid var(--accent-bd);
+            padding:2px 8px;border-radius:var(--radius-pill);
+            white-space:nowrap;vertical-align:middle;margin:0 2px;
+        }
+        .c-dot{
+            display:inline-block;width:7px;height:7px;border-radius:50%;
+            background:var(--accent);vertical-align:middle;margin:0 4px;
+            animation:c-pulse 2s ease-in-out infinite;
+        }
+        @keyframes c-pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.6)}}
+        .c-chip{
+            display:inline-flex;align-items:center;gap:3px;
+            font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+            color:var(--accent);background:transparent;border:1px solid var(--accent-bd);
+            padding:1px 7px;border-radius:var(--radius-sm);
+            white-space:nowrap;vertical-align:middle;
+        }
+        .c-chip.hot{color:var(--danger);border-color:var(--danger-bd);background:var(--danger-bg)}
+        .c-chip.new{color:var(--success);border-color:var(--success-bd);background:var(--success-bg)}
 
         @media(max-width:1024px){.ai-grid{grid-template-columns:1fr}}
         @media(max-width:768px){
@@ -220,7 +269,7 @@
     <section class="hero">
         <div class="container">
             <div class="hero-label">Weekly Report</div>
-            <h1>用户运营部 · WEEK17 周报</h1>
+            <h1>🔷 用户运营部 · WEEK17 周报</h1>
             <div class="hero-meta">
                 <span><span class="dot green"></span> 2026年4月21日 — 4月27日</span>
             </div>
@@ -234,8 +283,8 @@
                 <div class="section-inner">
                     <div class="section-hd">
                         <span class="section-num">01</span>
-                        <h2 class="section-ttl">部门KPI完成情况</h2>
-                        <span class="section-desc">数据截止 2026/4/27</span>
+                        <h2 class="section-ttl">🎯 部门KPI完成情况</h2>
+                        <span class="section-desc">数据截止 2026/4/27 <span class="c-badge">🫧 12项指标</span></span>
                     </div>
                     <div class="tbl-wrap">
                         <table>
@@ -340,15 +389,15 @@
                 <div class="section-inner">
                     <div class="section-hd">
                         <span class="section-num">02</span>
-                        <h2 class="section-ttl">部门KT完成情况</h2>
-                        <span class="section-desc">点击展开查看详情</span>
+                        <h2 class="section-ttl">⚡ 部门KT完成情况</h2>
+                        <span class="section-desc">点击展开查看详情 <span class="c-badge">⚡ 5项KT</span></span>
                     </div>
                     <div class="kt-list">
                         <!-- KT-1 -->
                         <div class="kt-item">
                             <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
                                 <div class="kt-num">1</div>
-                                <div class="kt-info"><div class="kt-kt">KT-1</div><div class="kt-name">联络中心"AI+专业力"进化</div></div>
+                                <div class="kt-info"><div class="kt-kt">KT-1</div><div class="kt-name">联络中心"AI+专业力"进化 <span class="c-chip new">ACTIVE</span></div></div>
                                 <span class="kt-poc-tag">@高强</span><span class="kt-poc-tag">@程艾静</span>
                                 <span class="kt-arrow">▾</span>
                             </div>
@@ -367,7 +416,7 @@
                         <div class="kt-item">
                             <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
                                 <div class="kt-num">2</div>
-                                <div class="kt-info"><div class="kt-kt">KT-2</div><div class="kt-name">APP与Web"AI+产品力"迭代</div></div>
+                                <div class="kt-info"><div class="kt-kt">KT-2</div><div class="kt-name">APP与Web"AI+产品力"迭代 <span class="c-chip new">ACTIVE</span></div></div>
                                 <span class="kt-poc-tag">@徐超</span><span class="kt-poc-tag">@蒋爽</span>
                                 <span class="kt-arrow">▾</span>
                             </div>
@@ -382,7 +431,7 @@
                         <div class="kt-item">
                             <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
                                 <div class="kt-num">3</div>
-                                <div class="kt-info"><div class="kt-kt">KT-3</div><div class="kt-name">讲好品牌故事</div></div>
+                                <div class="kt-info"><div class="kt-kt">KT-3</div><div class="kt-name">讲好品牌故事 <span class="c-chip new">ACTIVE</span></div></div>
                                 <span class="kt-poc-tag">@雷淦</span><span class="kt-poc-tag">@洪瑜</span><span class="kt-poc-tag">@刘彦</span>
                                 <span class="kt-arrow">▾</span>
                             </div>
@@ -395,7 +444,7 @@
                         <div class="kt-item">
                             <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
                                 <div class="kt-num">4</div>
-                                <div class="kt-info"><div class="kt-kt">KT-4</div><div class="kt-name">变革工作流程</div></div>
+                                <div class="kt-info"><div class="kt-kt">KT-4</div><div class="kt-name">变革工作流程 <span class="c-chip new">ACTIVE</span></div></div>
                                 <span class="kt-poc-tag">@雷淦</span><span class="kt-poc-tag">@程艾静</span><span class="kt-poc-tag">@洪瑜</span><span class="kt-poc-tag">@高强</span><span class="kt-poc-tag">@蒋爽</span>
                                 <span class="kt-arrow">▾</span>
                             </div>
@@ -416,7 +465,7 @@
                         <div class="kt-item">
                             <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
                                 <div class="kt-num">5</div>
-                                <div class="kt-info"><div class="kt-kt">KT-5</div><div class="kt-name">建设本地组织</div></div>
+                                <div class="kt-info"><div class="kt-kt">KT-5</div><div class="kt-name">建设本地组织 <span class="c-chip new">ACTIVE</span></div></div>
                                 <span class="kt-poc-tag">@雷淦</span><span class="kt-poc-tag">@程艾静</span><span class="kt-poc-tag">@洪瑜</span><span class="kt-poc-tag">@蒋爽</span>
                                 <span class="kt-arrow">▾</span>
                             </div>
@@ -442,8 +491,8 @@
                 <div class="section-inner">
                     <div class="section-hd">
                         <span class="section-num">03</span>
-                        <h2 class="section-ttl">个人周度工作安排</h2>
-                        <span class="section-desc">上周完成 → 本周重点</span>
+                        <h2 class="section-ttl">📋 个人周度工作安排</h2>
+                        <span class="section-desc">上周完成 → 本周重点 <span class="c-badge">📋 12模块</span></span>
                     </div>
                     <div class="tbl-wrap">
                         <table>
@@ -478,14 +527,14 @@
                 <div class="section-inner">
                     <div class="section-hd">
                         <span class="section-num">04</span>
-                        <h2 class="section-ttl">AI内部学习交流</h2>
+                        <h2 class="section-ttl">✨ AI内部学习交流</h2>
                         <span class="section-desc">Flipbook · 消灭客服的未来思想</span>
                     </div>
                     <p class="ai-intro">在AI原生架构下，客服的终极目标是彻底"消灭客服"与传统的对话窗口，让服务无缝弥散在产品的每一个角落。它不再是被动等待唤醒的工具，而是7x24小时全天候待命的隐形助手：既能利用多模态能力瞬间看懂屏幕圈选或实物画面，也能通过预测性UI在用户遇到阻碍时主动介入化解，甚至在洞察到批量共性问题时，直接向研发侧自动提交产品迭代建议。这种思维彻底将客服系统从被动的客诉兜底，升维成了驱动产品持续优化的核心引擎。</p>
                     <div class="ai-grid">
-                        <div class="ai-block"><div class="ai-block-num">5.1</div><div class="ai-block-ttl">突破多租户架构：千人千面的"动态工作台"</div><div class="ai-block-desc">引入Flipbook机制后，AI根据用户进线意图、租户属性和历史工单，实时"画"出专属操作面板。坐席看到的所有按钮、表单和知识流都是"一次性生成"的，业务线新增实现零前端开发。</div></div>
-                        <div class="ai-block"><div class="ai-block-num">5.2</div><div class="ai-block-ttl">售后排障降维打击：从"查阅文档"到"视觉级交互"</div><div class="ai-block-desc">视觉大模型可瞬间流式渲染设备高清3D交互图。坐席直接在屏幕上点击/放大故障零件，推演拆卸步骤。"所见即所得"的互动UI彻底改变知识库呈现形态，极大缩短平均处理时间（AHT）。</div></div>
-                        <div class="ai-block"><div class="ai-block-num">5.3</div><div class="ai-block-ttl">重塑7x24运营大屏：所思即所见的"流式数据探索"</div><div class="ai-block-desc">在像素流架构下，数据可视化变成真正的"对话式交互"。主管需要临时分析非标准维度数据时，模型直接在屏幕上流式渲染对应时间段数据关联图，点击异常节点AI瞬间下钻并"画"出明细视图。</div></div>
+                        <div class="ai-block"><div class="ai-block-num"><span class="c-dot"></span> 5.1</div><div class="ai-block-ttl">突破多租户架构：千人千面的"动态工作台"</div><div class="ai-block-desc">引入Flipbook机制后，AI根据用户进线意图、租户属性和历史工单，实时"画"出专属操作面板。坐席看到的所有按钮、表单和知识流都是"一次性生成"的，业务线新增实现零前端开发。</div></div>
+                        <div class="ai-block"><div class="ai-block-num"><span class="c-dot"></span> 5.2</div><div class="ai-block-ttl">售后排障降维打击：从"查阅文档"到"视觉级交互"</div><div class="ai-block-desc">视觉大模型可瞬间流式渲染设备高清3D交互图。坐席直接在屏幕上点击/放大故障零件，推演拆卸步骤。"所见即所得"的互动UI彻底改变知识库呈现形态，极大缩短平均处理时间（AHT）。</div></div>
+                        <div class="ai-block"><div class="ai-block-num"><span class="c-dot"></span> 5.3</div><div class="ai-block-ttl">重塑7x24运营大屏：所思即所见的"流式数据探索"</div><div class="ai-block-desc">在像素流架构下，数据可视化变成真正的"对话式交互"。主管需要临时分析非标准维度数据时，模型直接在屏幕上流式渲染对应时间段数据关联图，点击异常节点AI瞬间下钻并"画"出明细视图。</div></div>
                     </div>
                 </div>
             </div>
@@ -498,7 +547,8 @@
         <div class="footer-col"><strong>用户运营部</strong> · WEEK17 周报<br>数据截止 2026/4/27</div>
         <div class="footer-col"><strong>报告生成</strong> 2026/4/29</div>
         <div class="footer-col" style="text-align:right">数据来源 · Call Center / BI 系统<br>KPI 目标值 · 2026年度计划</div>
-    </div></div>
+    </div>
+    <div class="footer-tagline">💠 Carlcare · Service Excellence 💠</div></div>
 </footer>
 
 <script>
