@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,8 +61,13 @@
         .header-meta{display:flex;align-items:center;gap:16px}
         .header-date{font-size:14px;color:var(--text-tertiary)}
         .header-badge{font-size:12px;font-weight:500;color:var(--success);background:var(--success-bg);padding:3px 10px;border-radius:var(--radius-pill);border:1px solid var(--success-bd)}
-        .theme-toggle{background:var(--bg-button);border:1px solid var(--border-std);border-radius:var(--radius-md);color:var(--text-tertiary);cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s}
-        .theme-toggle:hover{background:var(--bg-card-hover);color:var(--text-primary)}
+        .theme-toggle{
+            background:var(--bg-button);border:1px solid var(--border-std);border-radius:var(--radius-md);
+            color:var(--text-secondary);cursor:pointer;padding:6px 14px;display:flex;align-items:center;gap:6px;
+            font-size:13px;font-weight:500;transition:all .2s;white-space:nowrap;
+        }
+        .theme-toggle:hover{background:var(--bg-card-hover);color:var(--text-primary);border-color:var(--border-std);}
+        .theme-toggle-icon{font-size:15px;line-height:1;}
 
         /* HERO */
         .hero{padding:60px 0 36px}
@@ -196,7 +201,7 @@
         <div class="header-meta">
             <span class="header-date">2026/4/27 · WEEK 17</span>
             <span class="header-badge">● Active</span>
-            <button class="theme-toggle" onclick="toggleTheme()" title="切换亮色/暗色">◐</button>
+            <button class="theme-toggle" onclick="toggleTheme()" title="切换深色/浅色模式"><span class="theme-toggle-icon">◐</span> 深色模式</button>
         </div>
     </div>
 </header>
@@ -481,11 +486,18 @@
 <footer class="footer">
     <div class="container"><div class="footer-grid">
         <div class="footer-col"><strong>用户运营部</strong> · WEEK17 周报<br>数据截止 2026/4/27</div>
-        <div class="footer-col"><strong>部门负责人</strong> 高强<br><strong>报告生成</strong> 2026/4/29</div>
+        <div class="footer-col"><strong>报告生成</strong> 2026/4/29</div>
         <div class="footer-col" style="text-align:right">数据来源 · Call Center / BI 系统<br>KPI 目标值 · 2026年度计划</div>
     </div></div>
 </footer>
 
-<script>function toggleTheme(){const e=document.documentElement;e.setAttribute('data-theme',e.getAttribute('data-theme')==='dark'?'light':'dark')}</script>
+<script>
+function toggleTheme(){
+    const e=document.documentElement;
+    const isDark=e.getAttribute('data-theme')==='dark';
+    e.setAttribute('data-theme',isDark?'light':'dark');
+    document.querySelector('.theme-toggle').innerHTML='<span class="theme-toggle-icon">◐</span> '+(isDark?'浅色模式':'深色模式');
+}
+</script>
 </body>
 </html>
