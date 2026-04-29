@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>用户运营部周报 — WEEK17</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
         :root {
             --bg-deep: #08090a;
@@ -68,6 +69,14 @@
         }
         .theme-toggle:hover{background:var(--bg-card-hover);color:var(--text-primary);border-color:var(--border-std);}
         .theme-toggle-icon{font-size:15px;line-height:1;}
+
+        .export-btn{
+            background:var(--accent);color:#fff;border:none;border-radius:var(--radius-md);
+            cursor:pointer;padding:6px 14px;display:flex;align-items:center;gap:6px;
+            font-size:13px;font-weight:500;transition:all .2s;white-space:nowrap;
+        }
+        .export-btn:hover{background:var(--accent-hover);}
+        .export-btn.loading{opacity:.6;pointer-events:none;}
 
         /* HERO */
         .hero{padding:60px 0 36px}
@@ -202,6 +211,7 @@
             <span class="header-date">2026/4/27 · WEEK 17</span>
             <span class="header-badge">● Active</span>
             <button class="theme-toggle" onclick="toggleTheme()" title="切换深色/浅色模式"><span class="theme-toggle-icon">◐</span> 深色模式</button>
+            <button class="export-btn" onclick="exportImage()" id="exportBtn"><span>📷</span> 导出长图</button>
         </div>
     </div>
 </header>
@@ -497,6 +507,40 @@ function toggleTheme(){
     const isDark=e.getAttribute('data-theme')==='dark';
     e.setAttribute('data-theme',isDark?'light':'dark');
     document.querySelector('.theme-toggle').innerHTML='<span class="theme-toggle-icon">◐</span> '+(isDark?'浅色模式':'深色模式');
+}
+
+async function exportImage(){
+    const btn=document.getElementById('exportBtn');
+    const toggle=document.querySelector('.theme-toggle');
+    const orig=btn.innerHTML;
+    btn.classList.add('loading');
+    btn.innerHTML='<span>⏳</span> 生成中...';
+    btn.style.visibility='hidden';
+    toggle.style.visibility='hidden';
+
+    await new Promise(r=>setTimeout(r,100));
+
+    try{
+        const canvas=await html2canvas(document.body,{
+            scale:2,
+            useCORS:true,
+            backgroundColor:getComputedStyle(document.body).backgroundColor,
+            windowWidth:1280,
+            logging:false
+        });
+        const link=document.createElement('a');
+        const d=new Date();
+        link.download='用户运营部周报-WEEK'+d.getFullYear()+'.png';
+        link.href=canvas.toDataURL('image/png');
+        link.click();
+    }catch(e){
+        alert('导出失败，请重试');
+    }
+
+    btn.style.visibility='';
+    toggle.style.visibility='';
+    btn.classList.remove('loading');
+    btn.innerHTML=orig;
 }
 </script>
 </body>
