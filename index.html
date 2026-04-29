@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户运营部周报 — WEEK17</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #08090a;
+            --bg-panel: #0f1011;
+            --bg-elevated: #191a1b;
+            --bg-card: rgba(255,255,255,0.025);
+            --bg-card-hover: rgba(255,255,255,0.05);
+            --bg-button: rgba(255,255,255,0.04);
+            --bg-tag: rgba(255,255,255,0.05);
+            --text-primary: #f7f8f8;
+            --text-secondary: #d0d6e0;
+            --text-tertiary: #8a8f98;
+            --text-quaternary: #62666d;
+            --accent: #5e6ad2;
+            --accent-bright: #7170ff;
+            --success: #10b981; --success-bg: rgba(16,185,129,0.1); --success-bd: rgba(16,185,129,0.2);
+            --warning: #f59e0b; --warning-bg: rgba(245,158,11,0.1); --warning-bd: rgba(245,158,11,0.2);
+            --danger: #ef4444;  --danger-bg: rgba(239,68,68,0.1);  --danger-bd: rgba(239,68,68,0.2);
+            --info: #3b82f6;    --info-bg: rgba(59,130,246,0.1);   --info-bd: rgba(59,130,246,0.2);
+            --border-std: rgba(255,255,255,0.08);
+            --border-subtle: rgba(255,255,255,0.05);
+            --radius-sm: 4px; --radius-md: 6px; --radius-lg: 10px; --radius-xl: 14px; --radius-pill: 9999px;
+            --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            --font-feature: "cv01", "ss03";
+            --max-w: 1280px;
+        }
+        [data-theme="light"] {
+            --bg-deep: #f5f6f7; --bg-panel: #fff; --bg-elevated: #eeeef0;
+            --bg-card: #fff; --bg-card-hover: #f8f9fa; --bg-button: rgba(0,0,0,0.03); --bg-tag: rgba(0,0,0,0.03);
+            --text-primary: #171717; --text-secondary: #444; --text-tertiary: #666; --text-quaternary: #888;
+            --border-std: rgba(0,0,0,0.1); --border-subtle: rgba(0,0,0,0.06);
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        html{font-size:16px;-webkit-font-smoothing:antialiased}
+        body{
+            font-family:var(--font);font-feature-settings:var(--font-feature);
+            background:var(--bg-deep);color:var(--text-primary);line-height:1.6;
+            transition:background .3s,color .3s;
+        }
+        .container{max-width:var(--max-w);margin:0 auto;padding:0 28px}
+
+        /* HEADER */
+        .header{
+            position:sticky;top:0;z-index:100;padding:14px 0;
+            background:rgba(8,9,10,.88);backdrop-filter:blur(24px);
+            border-bottom:1px solid var(--border-subtle);
+        }
+        [data-theme="light"] .header{background:rgba(245,246,247,.88)}
+        .header .container{display:flex;align-items:center;justify-content:space-between}
+        .header-brand{display:flex;align-items:center;gap:12px}
+        .header-logo{width:32px;height:32px;border-radius:var(--radius-md);background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:14px}
+        .header-title{font-size:15px;font-weight:500;color:var(--text-secondary)}
+        .header-meta{display:flex;align-items:center;gap:16px}
+        .header-date{font-size:14px;color:var(--text-tertiary)}
+        .header-badge{font-size:12px;font-weight:500;color:var(--success);background:var(--success-bg);padding:3px 10px;border-radius:var(--radius-pill);border:1px solid var(--success-bd)}
+        .theme-toggle{background:var(--bg-button);border:1px solid var(--border-std);border-radius:var(--radius-md);color:var(--text-tertiary);cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all .2s}
+        .theme-toggle:hover{background:var(--bg-card-hover);color:var(--text-primary)}
+
+        /* HERO */
+        .hero{padding:60px 0 36px}
+        .hero-label{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.6px;color:var(--text-quaternary);margin-bottom:8px}
+        .hero h1{font-size:40px;font-weight:500;line-height:1.15;letter-spacing:-.9px;color:var(--text-primary)}
+        .hero-meta{display:flex;gap:24px;margin-top:12px;font-size:15px;color:var(--text-tertiary);align-items:center}
+        .hero-meta .dot{width:7px;height:7px;border-radius:50%}
+        .hero-meta .dot.green{background:var(--success)}
+
+        /* SECTION — modular card */
+        .section{padding:0 0 48px}
+        .section-card{
+            background:var(--bg-card);border:1px solid var(--border-std);
+            border-radius:var(--radius-xl);overflow:hidden;
+            position:relative;
+        }
+        .section-card::before{
+            content:'';position:absolute;left:0;top:0;bottom:0;width:4px;
+        }
+        .section-card.kpi::before{background:var(--accent)}
+        .section-card.kt::before{background:var(--info)}
+        .section-card.personal::before{background:var(--warning)}
+        .section-card.ai::before{background:var(--success)}
+        .section-inner{padding:36px 32px}
+
+        .section-hd{display:flex;align-items:baseline;gap:12px;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid var(--border-subtle)}
+        .section-num{font-size:28px;font-weight:600;color:var(--accent);line-height:1;letter-spacing:-1px}
+        .section-ttl{font-size:22px;font-weight:600;color:var(--text-primary)}
+        .section-desc{font-size:14px;color:var(--text-tertiary);margin-left:auto}
+
+        /* KPI TABLE */
+        .tbl-wrap{overflow-x:auto;border:1px solid var(--border-std);border-radius:var(--radius-lg);background:var(--bg-panel)}
+        .tbl-wrap table{width:100%;border-collapse:collapse;font-size:13px;min-width:960px}
+        .tbl-wrap thead th{
+            font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;
+            color:var(--text-quaternary);text-align:left;padding:14px 12px;
+            background:var(--bg-elevated);border-bottom:2px solid var(--border-std);white-space:nowrap;
+        }
+        .tbl-wrap tbody td{padding:12px;color:var(--text-secondary);border-bottom:1px solid var(--border-subtle);vertical-align:middle;line-height:1.55}
+        .tbl-wrap tbody tr:last-child td{border-bottom:none}
+        .tbl-wrap tbody tr:hover td{background:var(--bg-card-hover)}
+        .tbl-wrap tbody tr:nth-child(even) td{background:rgba(255,255,255,0.01)}
+        [data-theme="light"] .tbl-wrap tbody tr:nth-child(even) td{background:rgba(0,0,0,0.015)}
+        td.kpi-name{font-weight:600;color:var(--text-primary);min-width:200px;font-size:13px}
+        td.kpi-val{font-family:var(--font-mono);font-size:13px;text-align:right;white-space:nowrap;font-weight:500}
+        td.kpi-val.hi{color:var(--success)}
+        td.kpi-val.lo{color:var(--danger)}
+        td.kpi-val.mid{color:var(--warning)}
+        td.kpi-poc{color:var(--accent);font-size:12px;white-space:nowrap}
+        td.kpi-note{font-size:12px;color:var(--text-tertiary);max-width:300px;line-height:1.6}
+        .kpi-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:var(--radius-pill);white-space:nowrap}
+        .kpi-status.ok{background:var(--success-bg);color:var(--success)}
+        .kpi-status.warn{background:var(--warning-bg);color:var(--warning)}
+        .kpi-status.bad{background:var(--danger-bg);color:var(--danger)}
+        .kpi-summary{display:flex;gap:24px;margin-top:20px;padding:16px 20px;background:var(--bg-button);border-radius:var(--radius-lg);font-size:13px;flex-wrap:wrap}
+        .kpi-summary-item{display:flex;align-items:center;gap:8px}
+        .kpi-summary-dot{width:10px;height:10px;border-radius:50%}
+        .kpi-summary-dot.green{background:var(--success)}
+        .kpi-summary-dot.amber{background:var(--warning)}
+        .kpi-summary-dot.gray{background:var(--text-quaternary)}
+        .kpi-summary strong{font-size:24px;font-weight:600;line-height:1}
+
+        /* KT ACCORDION */
+        .kt-list{display:flex;flex-direction:column;gap:12px}
+        .kt-item{
+            background:var(--bg-panel);border:1px solid var(--border-std);
+            border-radius:var(--radius-lg);overflow:hidden;transition:border-color .2s;
+        }
+        .kt-item:hover{border-color:var(--border-std);}
+        .kt-item.open{border-color:var(--info);}
+        .kt-hd{
+            display:flex;align-items:center;gap:14px;padding:18px 22px;
+            cursor:pointer;user-select:none;transition:background .2s;
+        }
+        .kt-hd:hover{background:var(--bg-card-hover)}
+        .kt-num{width:36px;height:36px;border-radius:var(--radius-md);background:var(--info);color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;flex-shrink:0}
+        .kt-info{flex:1}
+        .kt-kt{font-size:12px;font-weight:600;color:var(--info);font-family:var(--font-mono);letter-spacing:.3px}
+        .kt-name{font-size:16px;font-weight:600;color:var(--text-primary);margin-top:2px}
+        .kt-arrow{font-size:16px;color:var(--text-quaternary);transition:transform .3s}
+        .kt-item.open .kt-arrow{transform:rotate(180deg)}
+        .kt-bd{display:none;padding:0 22px 22px}
+        .kt-item.open .kt-bd{display:block}
+        .kt-block{margin-bottom:20px}
+        .kt-block-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-quaternary);margin-bottom:6px}
+        .kt-block-text{font-size:14px;color:var(--text-secondary);line-height:1.75;white-space:pre-line}
+        .kt-progress{padding:16px 18px;background:var(--bg-button);border-radius:var(--radius-md);border-left:3px solid var(--info)}
+        .kt-progress .kt-block-label{color:var(--info)}
+        .kt-poc-tag{display:inline-flex;font-size:12px;font-weight:500;color:var(--info);background:rgba(59,130,246,.1);padding:3px 10px;border-radius:var(--radius-pill);border:1px solid rgba(59,130,246,.15);margin:2px}
+
+        /* PERSONAL TABLE */
+        td.mod{font-weight:600;color:var(--text-primary);white-space:nowrap;font-size:13px}
+        td.owner{color:var(--accent);font-size:13px;white-space:nowrap;font-weight:500}
+        td.act{font-size:13px;line-height:1.7;padding-top:10px!important;padding-bottom:10px!important}
+        .act-section{font-weight:600;color:var(--text-secondary);font-size:12px;margin-top:8px;display:block}
+        .act-section:first-child{margin-top:0}
+
+        /* AI SECTION */
+        .ai-intro{font-size:15px;color:var(--text-secondary);line-height:1.8;margin-bottom:28px}
+        .ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .ai-block{padding:22px 24px;background:var(--bg-button);border-radius:var(--radius-lg);border:1px solid var(--border-subtle);transition:border-color .2s}
+        .ai-block:hover{border-color:var(--success-bd)}
+        .ai-block-num{font-size:12px;font-weight:600;color:var(--success);font-family:var(--font-mono);margin-bottom:4px}
+        .ai-block-ttl{font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:8px}
+        .ai-block-desc{font-size:14px;color:var(--text-secondary);line-height:1.7}
+
+        /* FOOTER */
+        .footer{padding:40px 0 60px;border-top:1px solid var(--border-std);margin-top:16px}
+        .footer-grid{display:flex;justify-content:space-between;gap:24px}
+        .footer-col{font-size:14px;color:var(--text-quaternary);line-height:1.7}
+        .footer-col strong{color:var(--text-tertiary);font-weight:600}
+
+        @media(max-width:1024px){.ai-grid{grid-template-columns:1fr}}
+        @media(max-width:768px){
+            .hero h1{font-size:30px;letter-spacing:-.5px}
+            .section-ttl{font-size:20px}.section-num{font-size:24px}
+            .container{padding:0 16px}.section-inner{padding:24px 18px}
+            .header-title{display:none}.footer-grid{flex-direction:column;gap:16px}
+        }
+        @media print{body{background:#fff;color:#000}.header{position:static;backdrop-filter:none}.theme-toggle{display:none}}
+    </style>
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="header-brand">
+            <div class="header-logo">CC</div>
+            <span class="header-title">用户运营部 · 周报</span>
+        </div>
+        <div class="header-meta">
+            <span class="header-date">2026/4/27 · WEEK 17</span>
+            <span class="header-badge">● Active</span>
+            <button class="theme-toggle" onclick="toggleTheme()" title="切换亮色/暗色">◐</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-label">Weekly Report</div>
+            <h1>用户运营部 · WEEK17 周报</h1>
+            <div class="hero-meta">
+                <span><span class="dot green"></span> 2026年4月21日 — 4月27日</span>
+                <span>部门负责人：高强</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 1. KPI ========== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-card kpi">
+                <div class="section-inner">
+                    <div class="section-hd">
+                        <span class="section-num">01</span>
+                        <h2 class="section-ttl">部门KPI完成情况</h2>
+                        <span class="section-desc">数据截止 2026/4/27</span>
+                    </div>
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th><th>KPI指标</th><th>目标</th><th>POC</th>
+                                    <th>WK14</th><th>WK15</th><th>WK16</th><th>WK17</th>
+                                    <th>累计</th><th>状态</th><th>异常备注</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">1</td>
+                                    <td class="kpi-name">手机中高端终端用户满意度</td><td class="kpi-val">93.5%</td><td class="kpi-poc">@雷淦</td>
+                                    <td class="kpi-val hi">97.07%</td><td class="kpi-val hi">97.63%</td><td class="kpi-val hi">95.60%</td><td class="kpi-val hi">95.88%</td><td class="kpi-val hi">97.36%</td>
+                                    <td><span class="kpi-status ok">✅ 达标</span></td><td class="kpi-note">无异常</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">2</td>
+                                    <td class="kpi-name">手机非中高端用户满意度</td><td class="kpi-val">93.0%</td><td class="kpi-poc">@雷淦</td>
+                                    <td class="kpi-val hi">97.01%</td><td class="kpi-val hi">97.89%</td><td class="kpi-val hi">95.75%</td><td class="kpi-val hi">96.67%</td><td class="kpi-val hi">97.80%</td>
+                                    <td><span class="kpi-status ok">✅ 达标</span></td><td class="kpi-note">无异常</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">3</td>
+                                    <td class="kpi-name">手机大客户满意度</td><td class="kpi-val">96.0%</td><td class="kpi-poc">@雷淦</td>
+                                    <td class="kpi-val hi">93.40%</td><td class="kpi-val hi">97.81%</td><td class="kpi-val hi">95.71%</td><td class="kpi-val hi">98.14%</td><td class="kpi-val hi">97.19%</td>
+                                    <td><span class="kpi-status ok">✅ 达标</span></td><td class="kpi-note">无异常</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">4</td>
+                                    <td class="kpi-name">新业务满意度</td><td class="kpi-val">92.0%</td><td class="kpi-poc">@雷淦</td>
+                                    <td class="kpi-val lo">76.85%</td><td class="kpi-val lo">74.31%</td><td class="kpi-val lo">74.31%</td><td class="kpi-val lo" style="color:var(--text-quaternary)">—</td><td class="kpi-val lo">74.31%</td>
+                                    <td><span class="kpi-status bad">⚠ 未达标</span></td><td class="kpi-note">配件终端3条不满（尼日2/埃及1）：等待时间长、维修质量差。家电大客户1条不满（尼日）：维修时间长</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">5</td>
+                                    <td class="kpi-name">前台服务体验满意度</td><td class="kpi-val">95.0%</td><td class="kpi-poc">@雷淦</td>
+                                    <td class="kpi-val hi">97.98%</td><td class="kpi-val hi">98.52%</td><td class="kpi-val hi">98.57%</td><td class="kpi-val hi">98.00%</td><td class="kpi-val hi">98.16%</td>
+                                    <td><span class="kpi-status ok">✅ 达标</span></td><td class="kpi-note">无异常</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">6</td>
+                                    <td class="kpi-name">Online坐席满意度</td><td class="kpi-val">92.0%</td><td class="kpi-poc">@程艾静</td>
+                                    <td class="kpi-val hi">94.16%</td><td class="kpi-val hi">91.52%</td><td class="kpi-val hi">93.24%</td><td class="kpi-val hi">97.74%</td><td class="kpi-val hi">93.94%</td>
+                                    <td><span class="kpi-status ok">✅ 达标</span></td><td class="kpi-note">4/20-26差评仅9条，但4/24起无数据回传记录。肯尼亚回传14条差评(top1)，埃及77%需关注</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">7</td>
+                                    <td class="kpi-name">AICC机器人满意度</td><td class="kpi-val">88.0%</td><td class="kpi-poc">@高强</td>
+                                    <td class="kpi-val lo">64.79%</td><td class="kpi-val lo">67.17%</td><td class="kpi-val lo">76.88%</td><td class="kpi-val lo" style="color:var(--text-quaternary)">—</td><td class="kpi-val lo">75.45%</td>
+                                    <td><span class="kpi-status bad">⚠ 未达标</span></td><td class="kpi-note">暂无更新</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">8</td>
+                                    <td class="kpi-name">AICC机器人解决率</td><td class="kpi-val">95.0%</td><td class="kpi-poc">@高强</td>
+                                    <td class="kpi-val lo">89.79%</td><td class="kpi-val lo">88.87%</td><td class="kpi-val lo">88.75%</td><td class="kpi-val lo" style="color:var(--text-quaternary)">—</td><td class="kpi-val lo">94.64%</td>
+                                    <td><span class="kpi-status bad">⚠ 持续走低</span></td><td class="kpi-note">4月起持续走低。上周转人工5844，锁机1126，非相关1699</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">9</td>
+                                    <td class="kpi-name">AICC有效帮助率</td><td class="kpi-val">75.0%</td><td class="kpi-poc">@高强</td>
+                                    <td class="kpi-val" style="color:var(--text-quaternary)" colspan="4">暂无 · 预计5月上线</td>
+                                    <td class="kpi-val" style="color:var(--text-quaternary)">—</td>
+                                    <td><span class="kpi-status warn">⏳ 待上线</span></td><td class="kpi-note">还未上线该功能，预计5月上线</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">10</td>
+                                    <td class="kpi-name">产品满意度（App+Web）</td><td class="kpi-val">93.0%</td><td class="kpi-poc">@蒋爽</td>
+                                    <td class="kpi-val mid">89.72%</td><td class="kpi-val mid">90.11%</td><td class="kpi-val mid">89.92%</td><td class="kpi-val mid">90.58%</td><td class="kpi-val mid">93.21%</td>
+                                    <td><span class="kpi-status warn">⚠ 未达标</span></td><td class="kpi-note">官网86.01%（样本228）；APP 90.89%（样本3503）。不满Top3：slow load/response、APP crash/lag、poor store service。不满机型infinix-x/V6.5.3</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">11</td>
+                                    <td class="kpi-name">投诉48H闭环率</td><td class="kpi-val">92.0%</td><td class="kpi-poc">@雷淦</td>
+                                    <td class="kpi-val hi">87.78%</td><td class="kpi-val hi">100.0%</td><td class="kpi-val hi">92.16%</td><td class="kpi-val hi">96.33%</td><td class="kpi-val hi">91.51%</td>
+                                    <td><span class="kpi-status ok">✅ 达标</span></td><td class="kpi-note">共122条不满，集中在原故障未修好</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:var(--text-quaternary)">12</td>
+                                    <td class="kpi-name">调研有效样本比例</td><td class="kpi-val">20.0%</td><td class="kpi-poc">@雷淦</td>
+                                    <td class="kpi-val hi">24.76%</td><td class="kpi-val hi">20.07%</td><td class="kpi-val hi">23.29%</td><td class="kpi-val hi">27.43%</td><td class="kpi-val hi">29.83%</td>
+                                    <td><span class="kpi-status ok">✅ 达标</span></td><td class="kpi-note">无异常</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="kpi-summary">
+                        <div class="kpi-summary-item"><span class="kpi-summary-dot green"></span> 达标 <strong>8</strong></div>
+                        <div class="kpi-summary-item"><span class="kpi-summary-dot amber"></span> 未达标 <strong>3</strong>（新业务 / 产品满意度 / AICC解决率走低）</div>
+                        <div class="kpi-summary-item"><span class="kpi-summary-dot gray"></span> 待上线 <strong>1</strong>（AICC有效帮助率）</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 2. KT ========== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-card kt">
+                <div class="section-inner">
+                    <div class="section-hd">
+                        <span class="section-num">02</span>
+                        <h2 class="section-ttl">部门KT完成情况</h2>
+                        <span class="section-desc">点击展开查看详情</span>
+                    </div>
+                    <div class="kt-list">
+                        <!-- KT-1 -->
+                        <div class="kt-item">
+                            <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
+                                <div class="kt-num">1</div>
+                                <div class="kt-info"><div class="kt-kt">KT-1</div><div class="kt-name">联络中心"AI+专业力"进化</div></div>
+                                <span class="kt-poc-tag">@高强</span><span class="kt-poc-tag">@程艾静</span>
+                                <span class="kt-arrow">▾</span>
+                            </div>
+                            <div class="kt-bd">
+                                <div class="kt-block"><div class="kt-block-label">衡量标准</div><div class="kt-block-text">AICC机器人解决率95% · 外呼机器人覆盖全球50%终端调研 · 外呼机器人有效样本比例15% · 呼入信息录入率90%</div></div>
+                                <div class="kt-progress"><div class="kt-block-label">本周进度</div><div class="kt-block-text">1）WhatsApp满意度调研上线 · 2）在线评价回收：帮助率/帮助标签预计5月上线 · 3）Sobot与CRM融合页面测试验收中，同时发起BPM流程 · 4）CSAT调研任务流上线时间5月底
+
+高强：周五到科特迪瓦处理迁移问题。肯尼亚国际外呼问题需运营商解决。
+
+呼叫中心切换：全球21个站点，18个已完成（85%）。小站点（赞比亚/津巴布韦）5月整合到肯尼亚。
+
+外呼机器人：越南语/阿拉伯语/英语/土耳其语/印尼语/马来语/乌尔都语/菲律宾语/泰语/缅甸语均已上线。本周回收样本量数据，上线印尼语/马来语/泰语/乌尔都语按键模板。</div></div>
+                            </div>
+                        </div>
+                        <!-- KT-2 -->
+                        <div class="kt-item">
+                            <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
+                                <div class="kt-num">2</div>
+                                <div class="kt-info"><div class="kt-kt">KT-2</div><div class="kt-name">APP与Web"AI+产品力"迭代</div></div>
+                                <span class="kt-poc-tag">@徐超</span><span class="kt-poc-tag">@蒋爽</span>
+                                <span class="kt-arrow">▾</span>
+                            </div>
+                            <div class="kt-bd">
+                                <div class="kt-block"><div class="kt-block-label">衡量标准</div><div class="kt-block-text">AI功能累计使用人数300万 · APP及官网产品满意度93% · APP MAU 9000万 · APP中高端专区活跃用户100万</div></div>
+                                <div class="kt-progress"><div class="kt-block-label">本周进度</div><div class="kt-block-text">徐超：手机真伪鉴定开发中，等待流程与信息中心提供接口（预计5月31日上线）。中高端专区签到积分测试中，抽奖活动开发中（预计6月30上线）。
+
+蒋爽：中高端运营专区大纲梳理完成，初版原型已交付——"1个AI核心亮点+基础权益积分+3大生态版块"。输出《Carlcare App中高端专区全案运营文档》。中高端积分/签到规则确认，权益梳理。AI功能累计使用人数看板需求沟通上线。</div></div>
+                            </div>
+                        </div>
+                        <!-- KT-3 -->
+                        <div class="kt-item">
+                            <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
+                                <div class="kt-num">3</div>
+                                <div class="kt-info"><div class="kt-kt">KT-3</div><div class="kt-name">讲好品牌故事</div></div>
+                                <span class="kt-poc-tag">@雷淦</span><span class="kt-poc-tag">@洪瑜</span><span class="kt-poc-tag">@刘彦</span>
+                                <span class="kt-arrow">▾</span>
+                            </div>
+                            <div class="kt-bd">
+                                <div class="kt-block"><div class="kt-block-label">Q1 成绩</div><div class="kt-block-text">粉丝数：16,707,677（目标1600万 ✅） · 总曝光：25,842,658（目标2500万 ✅）</div></div>
+                                <div class="kt-progress"><div class="kt-block-label">本周进度</div><div class="kt-block-text">雷淦：输出服务日运营策略（待完善）。洪瑜：IP漫画待开启；IP新年庆祝视频。礼品已与集团采购沟通，设计图输出中。短剧：Walter George学习中。刘彦：门店升级报告第一版已输出。</div></div>
+                            </div>
+                        </div>
+                        <!-- KT-4 -->
+                        <div class="kt-item">
+                            <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
+                                <div class="kt-num">4</div>
+                                <div class="kt-info"><div class="kt-kt">KT-4</div><div class="kt-name">变革工作流程</div></div>
+                                <span class="kt-poc-tag">@雷淦</span><span class="kt-poc-tag">@程艾静</span><span class="kt-poc-tag">@洪瑜</span><span class="kt-poc-tag">@高强</span><span class="kt-poc-tag">@蒋爽</span>
+                                <span class="kt-arrow">▾</span>
+                            </div>
+                            <div class="kt-bd">
+                                <div class="kt-block"><div class="kt-block-label">衡量标准</div><div class="kt-block-text">CSAT有效样本比例≥20% · 呼叫中心独立运营数据真实性100% · AIGC使用率80% · VOC 48H解决率≥92% · 大客户拜访覆盖率100% · 优质资源合作案例社媒/APP≥4个 + 联络中心≥3个</div></div>
+                                <div class="kt-progress"><div class="kt-block-label">本周进度</div><div class="kt-block-text">雷淦（调研/VOC/大客户）：WA调研结果回传数据集搭建至BI需求提出；营销云采购报价咨询（套餐年费18.6w）；VOC群推送消息不全BUG反馈至唐浩；大客户拜访应用BI看板搭建上线。
+
+程艾静（呼叫中心）：独立运营已落地，绩效方案同步，5月正式开启独立绩效考核。预计本周完成本地人员架构调整。
+
+洪瑜（AIGC/社媒）：AIGC培训课程更新视频赋能part1，Facebook自动回复培训5月初。Carlcare × oraimo合作视频发布（浏览量1w）；Carlcare × AHA Gaming预热视频发布、线上赛事开展。
+
+高强（资源合作）：输出Carlcare优质资源合作指引。出行业务沟通哥伦比亚热线；储能业务初步过（先上线机器人问答，开新租户）；AICC定价商量。
+
+蒋爽（APP/官网）：输出Carlcare APP/官网优质资源整合清单。跟AHA洽谈合作（IP形象植入小游戏，中高端专区接入）。考虑积分/活动版块接入HAH SDK。Revoo出行对接沈波。</div></div>
+                            </div>
+                        </div>
+                        <!-- KT-5 -->
+                        <div class="kt-item">
+                            <div class="kt-hd" onclick="this.parentElement.classList.toggle('open')">
+                                <div class="kt-num">5</div>
+                                <div class="kt-info"><div class="kt-kt">KT-5</div><div class="kt-name">建设本地组织</div></div>
+                                <span class="kt-poc-tag">@雷淦</span><span class="kt-poc-tag">@程艾静</span><span class="kt-poc-tag">@洪瑜</span><span class="kt-poc-tag">@蒋爽</span>
+                                <span class="kt-arrow">▾</span>
+                            </div>
+                            <div class="kt-bd">
+                                <div class="kt-block"><div class="kt-block-label">衡量标准</div><div class="kt-block-text">认证覆盖率100% · 参培率95% · 考试通过率90% · 高阶人才储备15%</div></div>
+                                <div class="kt-progress"><div class="kt-block-label">本周进度</div><div class="kt-block-text">雷淦（前台/体验主管）：4月前台培训资料下发/名单更新。UX主管摸底考参考率87.9%（应考33人，实考29人），平均分82.62，及格率（≥80分）62.1%，18人达标/11人待提高。
+
+程艾静（呼叫中心）：预计下周考试截止。
+
+洪瑜 & 蒋爽（DM/APP）：新人学习地图公示（Carlcare品牌介绍/VI规范/Facebook运营/APP运营/社媒回复话术/VOC等）。DM职级梳理（基础运营/高级运营）。梳理26年社媒优化人员5名。输出2026本地DM管理调整方案。APP尼日人员优化方案。Q1季度考核分数核查完毕。坦桑尼亚DM 5月优化。</div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 3. 个人周度工作安排 ========== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-card personal">
+                <div class="section-inner">
+                    <div class="section-hd">
+                        <span class="section-num">03</span>
+                        <h2 class="section-ttl">个人周度工作安排</h2>
+                        <span class="section-desc">上周完成 → 本周重点</span>
+                    </div>
+                    <div class="tbl-wrap">
+                        <table>
+                            <thead>
+                                <tr><th>业务模块</th><th>责任人</th><th>上周行动完成情况</th><th>本周重点工作事项</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class="mod">亚太用户体验</td><td class="owner">@陈路</td><td class="act"><span class="act-section">前台运营</span>巴基斯坦"免费寄还"服务调研：外呼255单，接通84单（32.94%），40单接受（47.62%），38单拒绝（45.24%）。孟加拉/巴基斯坦错误工单本地核实，提需CRM批量修改。<span class="act-section">呼叫中心</span>PK呼叫中心主管招聘完成，预计5/1入职。<span class="act-section">其他</span>明确巴基斯坦运营支持需求；输出空调上门服务宣传方案；菲律宾智能柜宣传落地跟进。</td><td class="act"><span class="act-section">前台运营</span>巴基斯坦"免费寄还"二轮调研（2月&3月长时间待还机工单）。亚太区前台月考培训+考试跟进；印度/孟加拉/巴基斯坦前台录单专项培训。<span class="act-section">呼叫中心</span>完成巴基斯坦/印尼钱包业务知识培训。<span class="act-section">其他</span>巴基斯坦空调服务宣传准备（物料设计/礼品采购）；智能柜持续宣传；"以旧换新"项目线上宣传。</td></tr>
+                                <tr><td class="mod">非洲用户体验</td><td class="owner">@何骏铭</td><td class="act">接待模块：4月接待员培训&考试跟进。内罗毕Oraimo呼叫中心业务合作。不满分析：加纳/科特/坦桑/刚果金4月不满跟进；不满跟进工具标签优化。3月UX主管绩效。晋升认证材料准备。</td><td class="act">内罗毕Oraimo呼叫中心业务合作。东非&中非区体验类场景培训材料准备。非洲全区客诉跟进。大客户精细化运营：Africa Dealer Refined Management Rules已确认执行标准；4月Dealer满意度报告首批示范国家完成。</td></tr>
+                                <tr><td class="mod">拉美用户体验</td><td class="owner">—</td><td class="act">玻利维亚接待员招聘&面试。呼叫中心迁移进度计划跟进。</td><td class="act">呼叫中心迁移跟进：JD准备及候选人筛选。出行坐席复用跟进。</td></tr>
+                                <tr><td class="mod">欧洲中东用户体验</td><td class="owner">@王尧蓂</td><td class="act">重新启动EE1家电工单回访调研。满意度管理工具开发上线（英文名+123456登录）。TSS/KDR大客户名单收集并更新。走访莫斯科Carlcare/小米/华为网点。撰写欧洲区Q1报告。欧洲运营部Q1季度会议。AI需求收集。AI实习生面试。</td><td class="act">4月满意度申诉。单独计算KSA满意度，非满案例跟进。KSA折叠屏特殊维保跟进。满意度管理工具完善导出报表/AI问答功能。核对5月呼叫中心排班。开发EE1 MAX/SMS渠道调研及土耳其WhatsApp调研。土耳其4月大客户拜访记录整理，5月线下拜访计划。用户体验主管4月KPI考评。</td></tr>
+                                <tr><td class="mod">总部运营 · AICC</td><td class="owner">@高强</td><td class="act">推进AICC锁机查询集成（需求支撑@陈路）。中高端语音按键交互新增法语/阿拉伯语（Gemini模型满足要求）。推进AICC质检需求/AI助手调研。肯尼亚SIp线路调试完成。印度转人工数量异常查看（1月底起个位数）。AI赋能培训（5月海外中方+当地员工培训）。</td><td class="act">推进CSAT漏斗任务管理进度提前排序，确定IT方案。推进AICC功能使用现状调研（非洲/东南亚片区坐席）。推进AICC质检需求/AI助手优化。切换CI呼叫中心。历史需求/历史Bug梳理更新状态。确定AI需求提报表单。</td></tr>
+                                <tr><td class="mod">总部运营 · 呼叫中心</td><td class="owner">@程艾静</td><td class="act">ASR智齿语言能力确认，与泰喜确认切换传音ASR方案。外呼机器人outbound数据看板已上线。上线埃及/伊拉克/越南外呼机器人模板。呼叫中心人效及季度报告验收。独立运营绩效方案落地及核算表输出海外。承接储能外呼业务并完成配置。培训CRM电话号码复制功能及呼入录单功能介绍。</td><td class="act">上线肯尼亚外呼机器人模板；上线印尼语/泰语/乌尔都语按键模板，进行数据对比。更新季度报告。呼叫中心季度报告成本板块补充。输出呼叫中心绩效计算模板下沉本地，4月绩效计算。出行业务外呼问卷设计及任务下发。储能业务Q1费用结算。</td></tr>
+                                <tr><td class="mod">APP开发</td><td class="owner">@徐超</td><td class="act">V6.5.3客户端Google Play全量发布。V6.5.4需求测试与验收。1-2月服务器费用核对提交审批。tOS17文案一致性排查。碎屏延保增加一卡多次履约需求沟通。新版本需求评审导入开发（5/15提测，5/28上线）。</td><td class="act">6.5.3版本需求发布上线。App发布Google Play灰度/Palm Store全量。积分规则增加后台可配置需求设计。手机检测增加省电/勿扰模式开关状态展示。提供网点信息给easybuy。增值服务宣传活动排期（5/7提测，5/8上线）。</td></tr>
+                                <tr><td class="mod">APP及官网运营</td><td class="owner">@蒋爽</td><td class="act">审核PUSH推送94条/论坛60篇。APP后台用户与隐私政策提需。APP解锁账户管理。AI功能累计使用人数看板需求对接@蔡松林。AHA站内宣传配置上线。尼日利亚等九国增值业务站内宣传排期。报销流程中英版本梳理。</td><td class="act">APP PUSH/论坛审核发布。后台日常维护配置。5月海外训练营课件准备。哥伦比亚Tecno/Infinix官网政策修改。中高端专区积分规则梳理交付。科特迪瓦周报模板输出。巴基斯坦以旧换新/智能柜宣传上线。增值业务宣传活动UI需求对接。产品满意度非满原因梳理。巴基斯坦新人赋能。报销流程下沉。</td></tr>
+                                <tr><td class="mod">VOC / 满意度 / 大客户</td><td class="owner">@雷淦</td><td class="act">营销云采购报价咨询。VOC季度报更新（欧洲）。土耳其VOC 48H解决率未达标跟进。UX主管月考结果输出发布。前台培训资料下发/名单更新。大客户拜访多维表格问题处理（CRM同步/BI拜访进度）。大客户拜访应用看板搭建上线BI。WA调研结果回传数据集搭建沟通。</td><td class="act">外呼机器人是否影响VOC投诉单量变化分析。VOC全球季度报更新。APP/官网不满声音纳入VOC。质量VOC看板搭建。大客户拜访应用逻辑/待办梳理。满意度测算分析逻辑及Skill输出。新业务满意度结果计算。满意度快速看板问题反馈。WA调研模板配置。稽查信息确认。</td></tr>
+                                <tr><td class="mod">品牌 / 社媒</td><td class="owner">@洪瑜</td><td class="act">肯尼亚DM周会项目制管理。oraimo合作视频发布（浏览量1w）。AHA Gaming预热视频发布+线上赛事（尼日/科特/乌干达/巴基斯坦）。乌干达千万粉丝活动视频拍摄。Q1品牌大事记输出。PK DM入职激活。换机柜宣传（菲律宾视频发布）。碎屏险+延保险设计方案输出。AIGC提示词幻觉规避课程准备。DM新人培训/肯尼亚设计师赋能。Irene AI赋能（Lovart+即梦）。Q1粉丝16.7M/曝光25.8M双达标。</td><td class="act">肯尼亚周会/亚太DM月度会议。oraimo合作视频数据追踪复盘。AHA大视频发布+赛事数据追踪。乌干达Tecno Camon 50宣传（视频剪辑/抽奖或礼品采购）。AIGC工具库搭建（提示词幻觉规避培训/Figma会员）。以旧换新项目社媒发布方案。碎屏险+延保宣传视频输出。换机柜App预约宣传。Facebook自动回复赋能课程。DM日常物料审核。坦桑尼亚DM优化。尼日活动方案调整。</td></tr>
+                                <tr><td class="mod">UI / 平面设计</td><td class="owner">@殷圣禹</td><td class="act">中高端AI Assistant抽奖页面。智能柜UI前期沟通。Sketch交接文件迁移Figma，控件库整理。Figma MCP接入Claude Code/Cursor调研。协助肯尼亚设计师视觉产出优化。</td><td class="act">中高端签到任务模块调整。智能柜UI前期沟通。Sketch→Figma控件库整理。巴西门店二维码海报。智能柜柜身装饰图。碎屏险&延保险活动H5。协助肯尼亚设计师视觉产出优化。</td></tr>
+                                <tr><td class="mod">门店设计</td><td class="owner">@刘彦</td><td class="act">安哥拉OSC翻新平面布置方案。</td><td class="act">安哥拉LUANDA OSC效果图+施工图。土耳其新办公室灯箱+背景墙施工图。乌干达销服一体店（对接中）。苏门达腊mini店×1+店中店×2。阿尔及利亚门头×1。巴基斯坦上门服务维修价格表。阿尔及利亚banner。</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 4. AI学习交流 ========== -->
+    <section class="section">
+        <div class="container">
+            <div class="section-card ai">
+                <div class="section-inner">
+                    <div class="section-hd">
+                        <span class="section-num">04</span>
+                        <h2 class="section-ttl">AI内部学习交流</h2>
+                        <span class="section-desc">Flipbook · 消灭客服的未来思想</span>
+                    </div>
+                    <p class="ai-intro">在AI原生架构下，客服的终极目标是彻底"消灭客服"与传统的对话窗口，让服务无缝弥散在产品的每一个角落。它不再是被动等待唤醒的工具，而是7x24小时全天候待命的隐形助手：既能利用多模态能力瞬间看懂屏幕圈选或实物画面，也能通过预测性UI在用户遇到阻碍时主动介入化解，甚至在洞察到批量共性问题时，直接向研发侧自动提交产品迭代建议。这种思维彻底将客服系统从被动的客诉兜底，升维成了驱动产品持续优化的核心引擎。</p>
+                    <div class="ai-grid">
+                        <div class="ai-block"><div class="ai-block-num">5.1</div><div class="ai-block-ttl">突破多租户架构：千人千面的"动态工作台"</div><div class="ai-block-desc">引入Flipbook机制后，AI根据用户进线意图、租户属性和历史工单，实时"画"出专属操作面板。坐席看到的所有按钮、表单和知识流都是"一次性生成"的，业务线新增实现零前端开发。</div></div>
+                        <div class="ai-block"><div class="ai-block-num">5.2</div><div class="ai-block-ttl">售后排障降维打击：从"查阅文档"到"视觉级交互"</div><div class="ai-block-desc">视觉大模型可瞬间流式渲染设备高清3D交互图。坐席直接在屏幕上点击/放大故障零件，推演拆卸步骤。"所见即所得"的互动UI彻底改变知识库呈现形态，极大缩短平均处理时间（AHT）。</div></div>
+                        <div class="ai-block"><div class="ai-block-num">5.3</div><div class="ai-block-ttl">重塑7x24运营大屏：所思即所见的"流式数据探索"</div><div class="ai-block-desc">在像素流架构下，数据可视化变成真正的"对话式交互"。主管需要临时分析非标准维度数据时，模型直接在屏幕上流式渲染对应时间段数据关联图，点击异常节点AI瞬间下钻并"画"出明细视图。</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container"><div class="footer-grid">
+        <div class="footer-col"><strong>用户运营部</strong> · WEEK17 周报<br>数据截止 2026/4/27</div>
+        <div class="footer-col"><strong>部门负责人</strong> 高强<br><strong>报告生成</strong> 2026/4/29</div>
+        <div class="footer-col" style="text-align:right">数据来源 · Call Center / BI 系统<br>KPI 目标值 · 2026年度计划</div>
+    </div></div>
+</footer>
+
+<script>function toggleTheme(){const e=document.documentElement;e.setAttribute('data-theme',e.getAttribute('data-theme')==='dark'?'light':'dark')}</script>
+</body>
+</html>
