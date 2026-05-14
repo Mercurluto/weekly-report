@@ -1,28 +1,40 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
-  <rect width="1280" height="760" rx="28" fill="#090d14"/>
-  <rect x="28" y="28" width="1224" height="704" rx="20" fill="#0d1117" stroke="#263143" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="860" viewBox="0 0 1280 860">
+  <rect width="1280" height="860" rx="28" fill="#090d14"/>
+  <rect x="28" y="28" width="1224" height="804" rx="20" fill="#0d1117" stroke="#263143" stroke-width="2"/>
   <rect x="28" y="28" width="1224" height="54" rx="20" fill="#161b22"/>
   <circle cx="64" cy="55" r="8" fill="#ef4444"/>
   <circle cx="90" cy="55" r="8" fill="#f59e0b"/>
   <circle cx="116" cy="55" r="8" fill="#10b981"/>
-  <text x="156" y="61" font-family="Segoe UI, Arial" font-size="18" fill="#c9d1d9">Administrator: Windows PowerShell → Ubuntu WSL</text>
-  <text x="64" y="130" font-family="Consolas, Menlo, monospace" font-size="22" fill="#58a6ff">PS C:\Users\You&gt;</text>
-  <text x="300" y="130" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">wsl --install</text>
-  <text x="64" y="176" font-family="Consolas, Menlo, monospace" font-size="20" fill="#8b949e">Installing Ubuntu... Restart your computer when prompted.</text>
-  <text x="64" y="238" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
-  <text x="262" y="238" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">sudo apt update &amp;&amp; sudo apt upgrade -y</text>
-  <text x="64" y="284" font-family="Consolas, Menlo, monospace" font-size="20" fill="#8b949e">[sudo] password for you: ********</text>
-  <text x="64" y="346" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
-  <text x="262" y="346" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -</text>
-  <text x="64" y="392" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
-  <text x="262" y="392" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">sudo apt install -y nodejs</text>
-  <text x="64" y="454" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
-  <text x="262" y="454" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</text>
-  <text x="64" y="516" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
-  <text x="262" y="516" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">hermes setup</text>
-  <text x="64" y="562" font-family="Consolas, Menlo, monospace" font-size="20" fill="#8b949e">Provider: DeepSeek  ·  Model: deepseek-chat  ·  API key: sk-****</text>
-  <text x="64" y="624" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
-  <text x="262" y="624" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">hermes chat -q "你好，请简单介绍一下你自己"</text>
-  <rect x="64" y="656" width="420" height="34" rx="17" fill="#10261b" stroke="#1f6f43"/>
-  <text x="86" y="679" font-family="Segoe UI, Arial" font-size="17" fill="#7ee787">看到 AI 回复，就说明部署成功</text>
+  <text x="156" y="61" font-family="Segoe UI, Arial" font-size="18" fill="#c9d1d9">Windows Terminal 管理员 -> Ubuntu WSL2 -> Hermes setup</text>
+
+  <text x="64" y="122" font-family="Consolas, Menlo, monospace" font-size="21" fill="#58a6ff">PS C:\Users\You&gt;</text>
+  <text x="298" y="122" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">wsl --install -d Ubuntu</text>
+  <text x="64" y="162" font-family="Segoe UI, Arial" font-size="18" fill="#8b949e">安装完成后按提示重启；若 Ubuntu 没自动弹出，在开始菜单搜索 Ubuntu。</text>
+
+  <rect x="64" y="190" width="1060" height="90" rx="14" fill="#101722" stroke="#263143"/>
+  <text x="92" y="226" font-family="Consolas, Menlo, monospace" font-size="20" fill="#3fb950">Installing, this may take a few minutes...</text>
+  <text x="92" y="260" font-family="Consolas, Menlo, monospace" font-size="20" fill="#e6edf3">Enter new UNIX username: milo</text>
+  <text x="540" y="260" font-family="Segoe UI, Arial" font-size="17" fill="#fbbf24">密码输入时不显示字符，正常输入后回车。</text>
+
+  <text x="64" y="326" font-family="Consolas, Menlo, monospace" font-size="21" fill="#58a6ff">PS C:\Users\You&gt;</text>
+  <text x="298" y="326" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">wsl -l -v</text>
+  <text x="64" y="366" font-family="Consolas, Menlo, monospace" font-size="19" fill="#8b949e">NAME      STATE      VERSION</text>
+  <text x="64" y="398" font-family="Consolas, Menlo, monospace" font-size="19" fill="#8b949e">Ubuntu    Running    2</text>
+
+  <text x="64" y="460" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="460" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">sudo apt update &amp;&amp; sudo apt upgrade -y</text>
+  <text x="64" y="500" font-family="Segoe UI, Arial" font-size="18" fill="#8b949e">这里输入的是 Ubuntu 密码，同样不会显示星号。</text>
+
+  <text x="64" y="562" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="562" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -</text>
+  <text x="64" y="600" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="600" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">sudo apt install -y nodejs</text>
+
+  <text x="64" y="662" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="662" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">curl .../hermes-agent/main/scripts/install.sh | bash</text>
+
+  <text x="64" y="724" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="724" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">hermes setup</text>
+  <rect x="64" y="750" width="740" height="54" rx="16" fill="#2a1d08" stroke="#a16207"/>
+  <text x="88" y="783" font-family="Segoe UI, Arial" font-size="18" fill="#fbbf24">API Key 粘贴后不会显示，直接回车；不要因为看不见就重复粘贴。</text>
 </svg>

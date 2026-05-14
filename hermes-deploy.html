@@ -127,14 +127,18 @@
 
             <div class="tab-panel active" id="windows">
                 <div class="shot"><img src="assets/hermes-deploy/windows-wsl-terminal.svg" alt="Windows WSL 终端步骤截图"></div>
-                <div class="caption">截图式步骤图：Windows 需要先安装微软官方 WSL2，再在 Ubuntu 里安装 Hermes。</div>
-                <div class="step"><div class="badge">1</div><div><h3>以管理员身份打开 PowerShell，安装 WSL2</h3><p>右键开始菜单，选择 Windows PowerShell（管理员）或 Terminal（管理员）。</p><pre>wsl --install</pre><p>安装完成后按提示重启电脑。重启后会弹出 Ubuntu 窗口，让你设置用户名和密码。</p></div></div>
-                <div class="step"><div class="badge">2</div><div><h3>更新 Ubuntu 系统包</h3><pre>sudo apt update && sudo apt upgrade -y</pre><p><code>sudo</code> 会要求输入刚才设置的 Ubuntu 密码。输入时看不见字符，这是正常的。</p></div></div>
-                <div class="step"><div class="badge">3</div><div><h3>安装 Node.js 22</h3><pre>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+                <div class="caption">截图式步骤图：Windows 先安装微软官方 WSL2 和 Ubuntu，再进入 Ubuntu 安装 Hermes。</div>
+                <div class="step"><div class="badge">1</div><div><h3>确认电脑能装 WSL2</h3><p>推荐 Windows 11，或 Windows 10 2004 以上版本。公司电脑如果弹出权限拦截，先联系 IT 开启“虚拟化”和“适用于 Linux 的 Windows 子系统”。</p></div></div>
+                <div class="step"><div class="badge">2</div><div><h3>以管理员身份打开 PowerShell</h3><p>右键开始菜单，选择 <strong>Terminal（管理员）</strong> 或 <strong>Windows PowerShell（管理员）</strong>。窗口标题里看到“管理员”再继续。</p></div></div>
+                <div class="step"><div class="badge">3</div><div><h3>安装 WSL2 和 Ubuntu</h3><pre>wsl --install -d Ubuntu</pre><p>如果系统提示重启，就先重启电脑。重启后如果没有自动弹出 Ubuntu，在开始菜单搜索 <strong>Ubuntu</strong> 手动打开。</p></div></div>
+                <div class="step"><div class="badge">4</div><div><h3>完成 Ubuntu 第一次初始化</h3><p>第一次打开 Ubuntu 会停在黑色窗口里安装几分钟。看到 <code>Enter new UNIX username</code> 时，输入一个英文用户名；随后输入密码并确认一次。</p><div class="callout warn">Ubuntu 输入密码时也不会显示星号、圆点或光标变化。不是卡住，正常输入完按回车即可。</div></div></div>
+                <div class="step"><div class="badge">5</div><div><h3>确认 Ubuntu 正在用 WSL2</h3><p>回到 PowerShell，运行：</p><pre>wsl -l -v</pre><p>看到 Ubuntu 这一行的 VERSION 是 <code>2</code> 就可以继续。如果是 <code>1</code>，执行：</p><pre>wsl --set-version Ubuntu 2</pre></div></div>
+                <div class="step"><div class="badge">6</div><div><h3>在 Ubuntu 里更新系统包</h3><pre>sudo apt update && sudo apt upgrade -y</pre><p><code>sudo</code> 会要求输入刚才设置的 Ubuntu 密码。这里同样不会显示字符，输入完直接回车。</p></div></div>
+                <div class="step"><div class="badge">7</div><div><h3>安装 Node.js 22</h3><pre>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs
 node --version</pre><p>看到类似 <code>v22.x.x</code> 就说明成功。</p></div></div>
-                <div class="step"><div class="badge">4</div><div><h3>安装 Hermes Agent</h3><pre>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre><p>安装完关闭 Ubuntu 窗口，重新打开，再运行：</p><pre>hermes --version</pre></div></div>
-                <div class="step"><div class="badge">5</div><div><h3>配置 DeepSeek</h3><pre>hermes setup</pre><p>选择 DeepSeek，粘贴 API Key，模型推荐 <code>deepseek-chat</code>，其余选项直接回车使用默认。</p></div></div>
+                <div class="step"><div class="badge">8</div><div><h3>安装 Hermes Agent</h3><pre>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre><p>安装完关闭 Ubuntu 窗口，重新打开，再运行：</p><pre>hermes --version</pre></div></div>
+                <div class="step"><div class="badge">9</div><div><h3>配置 DeepSeek</h3><pre>hermes setup</pre><p>选择 DeepSeek，粘贴 API Key，模型推荐 <code>deepseek-chat</code>，其余选项直接回车使用默认。</p><div class="callout warn">重点：Hermes 要你输入 API Key 时，粘贴后终端通常不会显示任何字符，也不会显示星号。粘贴一次后直接按回车，不要反复粘贴。</div></div></div>
             </div>
 
             <div class="tab-panel" id="macos">
@@ -145,7 +149,7 @@ node --version</pre><p>看到类似 <code>v22.x.x</code> 就说明成功。</p><
                 <div class="step"><div class="badge">3</div><div><h3>安装 Node.js</h3><pre>brew install node
 node --version</pre><p>看到类似 <code>v22.x.x</code> 就说明成功。</p></div></div>
                 <div class="step"><div class="badge">4</div><div><h3>安装 Hermes Agent</h3><pre>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre><p>安装完成后关闭终端重新打开，再检查：</p><pre>hermes --version</pre></div></div>
-                <div class="step"><div class="badge">5</div><div><h3>配置 DeepSeek</h3><pre>hermes setup</pre><p>选择 DeepSeek，粘贴 API Key，模型推荐 <code>deepseek-chat</code>。</p></div></div>
+                <div class="step"><div class="badge">5</div><div><h3>配置 DeepSeek</h3><pre>hermes setup</pre><p>选择 DeepSeek，粘贴 API Key，模型推荐 <code>deepseek-chat</code>。</p><div class="callout warn">重点：Hermes 输入 API Key 时不回显。粘贴后看起来像没反应，但通常已经输入成功，直接按回车。</div></div></div>
             </div>
         </div>
     </section>
@@ -166,6 +170,7 @@ node --version</pre><p>看到类似 <code>v22.x.x</code> 就说明成功。</p><
             <div class="section-head"><div><span class="num">05</span><h2>常见问题</h2></div><span class="section-note">遇到问题先看这里</span></div>
             <details><summary>Q: <code>wsl --install</code> 报错怎么办？</summary><p>确认 Windows 版本是 Windows 10 2004+ 或 Windows 11，并在 BIOS 中开启虚拟化。如果电脑太旧，先升级系统。</p></details>
             <details><summary>Q: <code>hermes: command not found</code>？</summary><p>关闭终端重新打开。如果还不行，执行 <code>source ~/.bashrc</code> 或 <code>source ~/.zshrc</code>。</p></details>
+            <details><summary>Q: 粘贴 API Key 后终端没有显示，是不是没粘上？</summary><p>通常不是。Hermes 输入 API Key 时会隐藏内容，不显示字符、星号或圆点。粘贴一次后直接回车即可，不要反复粘贴。</p></details>
             <details><summary>Q: API Key 配在哪里？</summary><p>通常在 <code>~/.hermes/.env</code> 文件里，也可以重新运行 <code>hermes setup</code>。</p></details>
             <details><summary>Q: 怎么换模型？</summary><p>输入 <code>hermes model</code>，或在聊天中输入 <code>/model</code>。</p></details>
             <details><summary>Q: DeepSeek 花多少钱？</summary><p>日常办公和学习很便宜。10 元通常足够试用很长时间，具体取决于每天对话量。</p></details>
