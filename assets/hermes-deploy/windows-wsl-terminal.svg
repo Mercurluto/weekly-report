@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <rect width="1280" height="760" rx="28" fill="#090d14"/>
+  <rect x="28" y="28" width="1224" height="704" rx="20" fill="#0d1117" stroke="#263143" stroke-width="2"/>
+  <rect x="28" y="28" width="1224" height="54" rx="20" fill="#161b22"/>
+  <circle cx="64" cy="55" r="8" fill="#ef4444"/>
+  <circle cx="90" cy="55" r="8" fill="#f59e0b"/>
+  <circle cx="116" cy="55" r="8" fill="#10b981"/>
+  <text x="156" y="61" font-family="Segoe UI, Arial" font-size="18" fill="#c9d1d9">Administrator: Windows PowerShell → Ubuntu WSL</text>
+  <text x="64" y="130" font-family="Consolas, Menlo, monospace" font-size="22" fill="#58a6ff">PS C:\Users\You&gt;</text>
+  <text x="300" y="130" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">wsl --install</text>
+  <text x="64" y="176" font-family="Consolas, Menlo, monospace" font-size="20" fill="#8b949e">Installing Ubuntu... Restart your computer when prompted.</text>
+  <text x="64" y="238" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
+  <text x="262" y="238" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">sudo apt update &amp;&amp; sudo apt upgrade -y</text>
+  <text x="64" y="284" font-family="Consolas, Menlo, monospace" font-size="20" fill="#8b949e">[sudo] password for you: ********</text>
+  <text x="64" y="346" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
+  <text x="262" y="346" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -</text>
+  <text x="64" y="392" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
+  <text x="262" y="392" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">sudo apt install -y nodejs</text>
+  <text x="64" y="454" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
+  <text x="262" y="454" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</text>
+  <text x="64" y="516" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
+  <text x="262" y="516" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">hermes setup</text>
+  <text x="64" y="562" font-family="Consolas, Menlo, monospace" font-size="20" fill="#8b949e">Provider: DeepSeek  ·  Model: deepseek-chat  ·  API key: sk-****</text>
+  <text x="64" y="624" font-family="Consolas, Menlo, monospace" font-size="22" fill="#3fb950">you@ubuntu:~$</text>
+  <text x="262" y="624" font-family="Consolas, Menlo, monospace" font-size="22" fill="#e6edf3">hermes chat -q "你好，请简单介绍一下你自己"</text>
+  <rect x="64" y="656" width="420" height="34" rx="17" fill="#10261b" stroke="#1f6f43"/>
+  <text x="86" y="679" font-family="Segoe UI, Arial" font-size="17" fill="#7ee787">看到 AI 回复，就说明部署成功</text>
+</svg>
