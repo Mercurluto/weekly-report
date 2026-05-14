@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="860" viewBox="0 0 1280 860">
+  <rect width="1280" height="860" rx="28" fill="#090d14"/>
+  <rect x="28" y="28" width="1224" height="804" rx="20" fill="#0d1117" stroke="#263143" stroke-width="2"/>
+  <rect x="28" y="28" width="1224" height="54" rx="20" fill="#161b22"/>
+  <circle cx="64" cy="55" r="8" fill="#ef4444"/>
+  <circle cx="90" cy="55" r="8" fill="#f59e0b"/>
+  <circle cx="116" cy="55" r="8" fill="#10b981"/>
+  <text x="156" y="61" font-family="Segoe UI, Arial" font-size="18" fill="#c9d1d9">Windows Terminal as Admin -> Ubuntu WSL2 -> Hermes setup</text>
+  <text x="64" y="122" font-family="Consolas, Menlo, monospace" font-size="21" fill="#58a6ff">PS C:\Users\You&gt;</text>
+  <text x="298" y="122" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">wsl --install -d Ubuntu</text>
+  <text x="64" y="162" font-family="Segoe UI, Arial" font-size="18" fill="#8b949e">Restart when prompted. If Ubuntu does not open, search Ubuntu in the Start menu.</text>
+  <rect x="64" y="190" width="1060" height="90" rx="14" fill="#101722" stroke="#263143"/>
+  <text x="92" y="226" font-family="Consolas, Menlo, monospace" font-size="20" fill="#3fb950">Installing, this may take a few minutes...</text>
+  <text x="92" y="260" font-family="Consolas, Menlo, monospace" font-size="20" fill="#e6edf3">Enter new UNIX username: milo</text>
+  <text x="538" y="260" font-family="Segoe UI, Arial" font-size="17" fill="#fbbf24">Password input is hidden. Type it, then press Enter.</text>
+  <text x="64" y="326" font-family="Consolas, Menlo, monospace" font-size="21" fill="#58a6ff">PS C:\Users\You&gt;</text>
+  <text x="298" y="326" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">wsl -l -v</text>
+  <text x="64" y="366" font-family="Consolas, Menlo, monospace" font-size="19" fill="#8b949e">NAME      STATE      VERSION</text>
+  <text x="64" y="398" font-family="Consolas, Menlo, monospace" font-size="19" fill="#8b949e">Ubuntu    Running    2</text>
+  <text x="64" y="460" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="460" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">sudo apt update &amp;&amp; sudo apt upgrade -y</text>
+  <text x="64" y="500" font-family="Segoe UI, Arial" font-size="18" fill="#8b949e">This asks for the Ubuntu password. It will not show stars.</text>
+  <text x="64" y="562" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="562" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -</text>
+  <text x="64" y="600" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="600" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">sudo apt install -y nodejs</text>
+  <text x="64" y="662" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="662" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">curl .../hermes-agent/main/scripts/install.sh | bash</text>
+  <text x="64" y="724" font-family="Consolas, Menlo, monospace" font-size="21" fill="#3fb950">milo@ubuntu:~$</text>
+  <text x="270" y="724" font-family="Consolas, Menlo, monospace" font-size="21" fill="#e6edf3">hermes setup</text>
+  <rect x="64" y="750" width="830" height="54" rx="16" fill="#2a1d08" stroke="#a16207"/>
+  <text x="88" y="783" font-family="Segoe UI, Arial" font-size="18" fill="#fbbf24">API key input is hidden. Paste once, press Enter, and do not paste repeatedly.</text>
+</svg>

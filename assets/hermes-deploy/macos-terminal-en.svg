@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <rect width="1280" height="760" rx="28" fill="#08090a"/>
+  <rect x="28" y="28" width="1224" height="704" rx="20" fill="#101216" stroke="#2a2d36" stroke-width="2"/>
+  <rect x="28" y="28" width="1224" height="54" rx="20" fill="#1b1d23"/>
+  <circle cx="64" cy="55" r="8" fill="#ff5f57"/>
+  <circle cx="90" cy="55" r="8" fill="#febc2e"/>
+  <circle cx="116" cy="55" r="8" fill="#28c840"/>
+  <text x="156" y="61" font-family="-apple-system, BlinkMacSystemFont, Arial" font-size="18" fill="#e4e5e7">Terminal -> macOS Hermes setup</text>
+  <text x="64" y="132" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#5e6ad2">you@MacBook ~ %</text>
+  <text x="274" y="132" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#f4f4f5">brew --version</text>
+  <text x="64" y="178" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="20" fill="#8b8d93">Homebrew 4.x.x</text>
+  <text x="64" y="240" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#5e6ad2">you@MacBook ~ %</text>
+  <text x="274" y="240" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#f4f4f5">brew install node</text>
+  <text x="64" y="286" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="20" fill="#8b8d93">Installing node and npm...</text>
+  <text x="64" y="348" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#5e6ad2">you@MacBook ~ %</text>
+  <text x="274" y="348" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#f4f4f5">node --version</text>
+  <text x="64" y="394" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="20" fill="#10b981">v22.x.x</text>
+  <text x="64" y="456" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#5e6ad2">you@MacBook ~ %</text>
+  <text x="274" y="456" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#f4f4f5">curl .../hermes-agent/main/scripts/install.sh | bash</text>
+  <text x="64" y="518" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#5e6ad2">you@MacBook ~ %</text>
+  <text x="274" y="518" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#f4f4f5">hermes setup</text>
+  <text x="64" y="564" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="20" fill="#8b8d93">Choose provider: DeepSeek - paste API key - accept defaults</text>
+  <rect x="64" y="594" width="740" height="46" rx="14" fill="#2a1d08" stroke="#a16207"/>
+  <text x="88" y="623" font-family="-apple-system, BlinkMacSystemFont, Arial" font-size="17" fill="#fbbf24">API key input is hidden. Paste once, then press Enter.</text>
+  <text x="64" y="684" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#5e6ad2">you@MacBook ~ %</text>
+  <text x="274" y="684" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="22" fill="#f4f4f5">hermes</text>
+</svg>

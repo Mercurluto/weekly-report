@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Agent Setup Guide</title>
+    <style>
+        :root{
+            --bg:#08090a;--panel:#111318;--elev:#171a21;--card:#12151c;--line:#242832;
+            --text:#e4e5e7;--muted:#9ca0aa;--soft:#717680;--accent:#5e6ad2;--accent2:#38c0e0;
+            --success:#10b981;--warn:#f59e0b;--danger:#ef4444;--code:#0d0f14;
+            --radius:8px;--max:1180px;--font:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+            --mono:"JetBrains Mono",Consolas,Menlo,monospace;
+        }
+        *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.7}
+        a{color:inherit}.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+        .topbar{position:sticky;top:0;z-index:20;background:rgba(8,9,10,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+        .topbar .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+        .brand{display:flex;align-items:center;gap:12px;font-weight:700;color:var(--text);letter-spacing:.02em}
+        .nav{display:flex;gap:10px;align-items:center}.nav a{text-decoration:none;color:var(--muted);font-size:14px;padding:7px 10px;border:1px solid transparent;border-radius:7px}.nav a:hover,.nav a.active{color:var(--text);border-color:var(--line);background:rgba(255,255,255,.03)}.nav a.lang-toggle{color:#061014;background:linear-gradient(135deg,#facc15,#38c0e0);border-color:transparent;font-weight:800;box-shadow:0 0 22px rgba(56,192,224,.28)}
+        .hero{padding:72px 0 34px}.eyebrow{color:var(--accent2);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.hero h1{font-size:clamp(34px,5vw,64px);line-height:1.06;letter-spacing:-1.2px;margin:12px 0 18px;max-width:950px}.lead{font-size:18px;color:var(--muted);max-width:820px}
+        .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;margin-top:34px}.hero-card,.toc{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+        .pill-row{display:flex;gap:10px;flex-wrap:wrap}.pill{border:1px solid rgba(94,106,210,.35);background:rgba(94,106,210,.13);color:#cfd3ff;border-radius:999px;padding:5px 10px;font-size:13px}
+        .toc h2{font-size:15px;margin:0 0 12px;color:var(--muted)}.toc a{display:block;text-decoration:none;color:var(--text);padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px}.toc a:last-child{border-bottom:0}
+        section{padding:38px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin-bottom:18px}.num{font-family:var(--mono);color:var(--accent2);font-size:14px}.section-head h2{font-size:28px;line-height:1.2;margin:4px 0 0}.section-note{color:var(--soft);font-size:14px}
+        .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin:14px 0}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+        .mini{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px}.mini h3,.card h3{margin:0 0 8px;font-size:18px}.mini p,.card p{margin:0 0 10px;color:var(--muted)}.mini ul,.card ul{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+        .shot{margin:16px 0 0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#090d14}.shot img{display:block;width:100%;height:auto}.caption{font-size:13px;color:var(--soft);margin-top:8px}
+        .tabs{display:flex;gap:10px;position:sticky;top:76px;z-index:10;background:rgba(8,9,10,.72);backdrop-filter:blur(12px);padding:10px 0;margin:10px 0 18px}.tab{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:7px;padding:9px 14px;cursor:pointer;font-weight:600}.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+        .tab-panel{display:none}.tab-panel.active{display:block}.step{display:grid;grid-template-columns:46px 1fr;gap:16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px;margin:12px 0}.badge{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(94,106,210,.18);color:#d5d8ff;font-weight:700;border:1px solid rgba(94,106,210,.42)}
+        pre{margin:12px 0 0;background:var(--code);border:1px solid #20242d;border-radius:7px;padding:14px 16px;overflow:auto;color:#d7f8e8;font-family:var(--mono);font-size:14px;line-height:1.55}code{font-family:var(--mono);background:rgba(255,255,255,.06);padding:2px 5px;border-radius:4px}
+        .callout{border:1px solid var(--line);border-left:4px solid var(--accent2);background:rgba(56,192,224,.07);border-radius:var(--radius);padding:16px;margin:14px 0;color:var(--muted)}.callout.warn{border-left-color:var(--warn);background:rgba(245,158,11,.08)}.callout.ok{border-left-color:var(--success);background:rgba(16,185,129,.08)}
+        details{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:10px 0}summary{cursor:pointer;font-weight:700}details p{color:var(--muted);margin-bottom:0}
+        .footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--soft);font-size:14px}.footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+        @media(max-width:860px){.hero-grid,.grid-2,.grid-3{grid-template-columns:1fr}.topbar{overflow-x:auto}.topbar .wrap{height:auto;align-items:flex-start;flex-direction:column;padding-top:12px;padding-bottom:12px}.nav{flex-wrap:nowrap;white-space:nowrap}.hero{padding-top:58px}.hero h1{font-size:36px;line-height:1.08;letter-spacing:-.5px}.lead{font-size:17px}.tabs{top:106px}.step{grid-template-columns:1fr}.badge{margin-bottom:4px}.section-head{display:block}}
+        @media(max-width:430px){.wrap{padding:0 20px}.hero h1{font-size:30px;letter-spacing:-.2px}.section-head h2{font-size:25px}.card,.mini,.hero-card,.toc{padding:20px}.nav a{font-size:13px}}
+    </style>
+</head>
+<body>
+<header class="topbar">
+    <div class="wrap">
+        <div class="brand">Hermes Agent Setup</div>
+        <nav class="nav">
+            <a class="active" href="hermes-deploy-en.html">Guide</a>
+            <a href="#windows">Windows</a>
+            <a href="#macos">macOS</a>
+            <a href="#faq">FAQ</a>
+            <a class="lang-toggle" href="hermes-deploy.html">中文</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="wrap">
+            <div class="eyebrow">Hermes Agent Setup Guide</div>
+            <h1>Set up Hermes Agent from zero, so your team can actually use it</h1>
+            <p class="lead">A step-by-step visual guide for non-technical teammates. No command-line background required. Copy the commands, follow the screenshots, and run Hermes on Windows or macOS with DeepSeek as the recommended model provider.</p>
+            <div class="hero-grid">
+                <div class="hero-card">
+                    <div class="pill-row">
+                        <span class="pill">10-30 minutes</span>
+                        <span class="pill">Windows / macOS</span>
+                        <span class="pill">DeepSeek recommended</span>
+                        <span class="pill">Copy and paste</span>
+                    </div>
+                    <div class="callout ok">The goal is not to teach Linux. The goal is to help a first-time terminal user know where to click, which line to copy, and what success looks like.</div>
+                </div>
+                <aside class="toc">
+                    <h2>Quick navigation</h2>
+                    <a href="#what">01 What Hermes is</a>
+                    <a href="#prepare">02 Prepare DeepSeek and terminal</a>
+                    <a href="#install">03 Install on your system</a>
+                    <a href="#success">04 Check success</a>
+                    <a href="#faq">05 FAQ</a>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section id="what">
+        <div class="wrap">
+            <div class="section-head"><div><span class="num">01</span><h2>What Hermes is</h2></div><span class="section-note">A 30-second explanation</span></div>
+            <div class="grid-3">
+                <div class="mini"><h3>What it is</h3><p>Hermes is an AI assistant that runs on your computer. It can read files, run commands, and help complete workflows. It is not limited to chatting in a browser.</p></div>
+                <div class="mini"><h3>What it can do</h3><p>Create HTML reports, analyze spreadsheets, organize documents, assist deployment work, and turn repeated tasks into automated workflows.</p></div>
+                <div class="mini"><h3>Why DeepSeek</h3><p>DeepSeek is easy to register, affordable, and works well for everyday office testing. A small balance is usually enough for a long trial.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prepare">
+        <div class="wrap">
+            <div class="section-head"><div><span class="num">02</span><h2>Prepare DeepSeek and terminal</h2></div><span class="section-note">Do this before installing Hermes</span></div>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Create a DeepSeek API key</h3>
+                    <ol>
+                        <li>Open <code>platform.deepseek.com</code> in your browser.</li>
+                        <li>Register or sign in with phone or email.</li>
+                        <li>Open <strong>API Keys</strong> from the left menu.</li>
+                        <li>Create a new API key. A name like "My laptop" is fine.</li>
+                        <li>Copy the key that starts with <code>sk-</code> and save it privately.</li>
+                    </ol>
+                    <div class="callout warn">An API key is like a password. Configure it only on your own computer. Do not send it in a group chat and do not share screenshots of it.</div>
+                </div>
+                <div class="card">
+                    <h3>Add a small balance first</h3>
+                    <p>If the DeepSeek balance is empty, Hermes may stop responding. Add a small balance first, then enable balance reminders if needed.</p>
+                    <div class="shot"><img src="assets/hermes-deploy/deepseek-platform.png" alt="DeepSeek platform screenshot"></div>
+                    <div class="caption">Real screenshot: use this to confirm you are on the DeepSeek platform.</div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>What the terminal is</h3>
+                <p>A terminal is a window where you control your computer with text commands. You do not need to memorize anything. Copy the commands in this guide exactly, paste them into the terminal, and press Enter.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="install">
+        <div class="wrap">
+            <div class="section-head"><div><span class="num">03</span><h2>Install on your system</h2></div><span class="section-note">Windows uses WSL2; macOS installs natively</span></div>
+            <div class="tabs">
+                <button class="tab active" data-tab="windows">Windows (WSL2)</button>
+                <button class="tab" data-tab="macos">macOS</button>
+            </div>
+
+            <div class="tab-panel active" id="windows">
+                <div class="shot"><img src="assets/hermes-deploy/windows-wsl-terminal-en.svg" alt="Windows WSL terminal setup screenshot"></div>
+                <div class="caption">Screenshot-style flow: install official Microsoft WSL2 and Ubuntu first, then install Hermes inside Ubuntu.</div>
+                <div class="step"><div class="badge">1</div><div><h3>Make sure your PC can run WSL2</h3><p>Recommended: Windows 11, or Windows 10 version 2004 or later. If a company PC blocks permissions, ask IT to enable virtualization and Windows Subsystem for Linux.</p></div></div>
+                <div class="step"><div class="badge">2</div><div><h3>Open PowerShell as administrator</h3><p>Right-click the Start menu and choose <strong>Terminal (Admin)</strong> or <strong>Windows PowerShell (Admin)</strong>. Continue only when the window title shows administrator mode.</p></div></div>
+                <div class="step"><div class="badge">3</div><div><h3>Install WSL2 and Ubuntu</h3><pre>wsl --install -d Ubuntu</pre><p>If Windows asks you to restart, restart first. If Ubuntu does not open automatically after restart, search <strong>Ubuntu</strong> in the Start menu and open it manually.</p></div></div>
+                <div class="step"><div class="badge">4</div><div><h3>Finish Ubuntu first-time setup</h3><p>The first launch may install for a few minutes. When you see <code>Enter new UNIX username</code>, type an English username. Then enter and confirm a password.</p><div class="callout warn">Ubuntu password input is hidden. You will not see stars, dots, or cursor movement. This is normal. Type the password and press Enter.</div></div></div>
+                <div class="step"><div class="badge">5</div><div><h3>Confirm Ubuntu is using WSL2</h3><p>Go back to PowerShell and run:</p><pre>wsl -l -v</pre><p>If Ubuntu shows VERSION <code>2</code>, continue. If it shows <code>1</code>, run:</p><pre>wsl --set-version Ubuntu 2</pre></div></div>
+                <div class="step"><div class="badge">6</div><div><h3>Update Ubuntu packages</h3><pre>sudo apt update && sudo apt upgrade -y</pre><p><code>sudo</code> asks for your Ubuntu password. Again, the password will not be visible.</p></div></div>
+                <div class="step"><div class="badge">7</div><div><h3>Install Node.js 22</h3><pre>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt install -y nodejs
+node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js is installed.</p></div></div>
+                <div class="step"><div class="badge">8</div><div><h3>Install Hermes Agent</h3><pre>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre><p>After installation, close Ubuntu, reopen it, then run:</p><pre>hermes --version</pre></div></div>
+                <div class="step"><div class="badge">9</div><div><h3>Configure DeepSeek</h3><pre>hermes setup</pre><p>Choose DeepSeek, paste your API key, use <code>deepseek-chat</code> as the model, and press Enter for default options.</p><div class="callout warn">Important: when Hermes asks for the API key, pasted text is usually hidden. It will not show characters or stars. Paste once, press Enter, and do not paste repeatedly.</div></div></div>
+            </div>
+
+            <div class="tab-panel" id="macos">
+                <div class="shot"><img src="assets/hermes-deploy/macos-terminal-en.svg" alt="macOS terminal setup screenshot"></div>
+                <div class="caption">Screenshot-style flow: on macOS, install Homebrew, Node.js, and Hermes directly in Terminal.</div>
+                <div class="step"><div class="badge">1</div><div><h3>Open Terminal</h3><p>Press <code>Cmd + Space</code>, search Terminal, and press Enter.</p></div></div>
+                <div class="step"><div class="badge">2</div><div><h3>Check or install Homebrew</h3><pre>brew --version</pre><p>If you see command not found, run:</p><pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre></div></div>
+                <div class="step"><div class="badge">3</div><div><h3>Install Node.js</h3><pre>brew install node
+node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js is installed.</p></div></div>
+                <div class="step"><div class="badge">4</div><div><h3>Install Hermes Agent</h3><pre>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre><p>After installation, close Terminal, reopen it, then check:</p><pre>hermes --version</pre></div></div>
+                <div class="step"><div class="badge">5</div><div><h3>Configure DeepSeek</h3><pre>hermes setup</pre><p>Choose DeepSeek, paste your API key, and use <code>deepseek-chat</code> as the model.</p><div class="callout warn">Important: Hermes hides API key input. It may look like nothing happened after pasting, but the key is usually already there. Press Enter once.</div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="success">
+        <div class="wrap">
+            <div class="section-head"><div><span class="num">04</span><h2>Check whether it works</h2></div><span class="section-note">Any AI reply means setup worked</span></div>
+            <div class="card">
+                <h3>Run this command</h3>
+                <pre>hermes chat -q "Hello, please briefly introduce yourself"</pre>
+                <div class="callout ok">If Hermes replies normally, setup is complete. Later, type <code>hermes</code> in the terminal and press Enter to enter chat mode.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="wrap">
+            <div class="section-head"><div><span class="num">05</span><h2>FAQ</h2></div><span class="section-note">Check here when something feels stuck</span></div>
+            <details><summary>Q: What if <code>wsl --install</code> fails?</summary><p>Confirm your system is Windows 10 2004+ or Windows 11, and make sure virtualization is enabled. On a company laptop, IT may need to enable it.</p></details>
+            <details><summary>Q: What if I see <code>hermes: command not found</code>?</summary><p>Close and reopen the terminal. If it still fails, run <code>source ~/.bashrc</code> or <code>source ~/.zshrc</code>.</p></details>
+            <details><summary>Q: I pasted the API key but nothing appeared. Did it fail?</summary><p>Usually no. Hermes hides API key input, so you will not see characters, stars, or dots. Paste once and press Enter.</p></details>
+            <details><summary>Q: Where is the API key stored?</summary><p>Usually in <code>~/.hermes/.env</code>. You can also run <code>hermes setup</code> again.</p></details>
+            <details><summary>Q: How do I switch models?</summary><p>Run <code>hermes model</code>, or type <code>/model</code> in chat mode.</p></details>
+            <details><summary>Q: How much does DeepSeek cost?</summary><p>Everyday office testing is usually inexpensive. The exact cost depends on how much you use it.</p></details>
+            <details><summary>Q: How do WSL and Windows files connect?</summary><p>Inside WSL, Windows files are under <code>/mnt/c/</code>. In Windows File Explorer, open <code>\\wsl$\Ubuntu</code> to browse Ubuntu files.</p></details>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="wrap">
+        <span>Maintained by Milo</span>
+        <span>Last updated: May 2026</span>
+        <span>Hermes Agent by Nous Research</span>
+    </div>
+</footer>
+
+<script>
+document.querySelectorAll(".tab").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+        document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+        document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById(btn.dataset.tab).classList.add("active");
+    });
+});
+</script>
+</body>
+</html>
