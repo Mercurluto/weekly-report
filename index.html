@@ -73,12 +73,6 @@
         .header-title{font-size:15px;font-weight:500;color:var(--text-secondary)}
         .header-meta{display:flex;align-items:center;gap:16px}
         .header-date{font-size:14px;color:var(--text-tertiary)}
-        .header-link{
-            font-size:13px;font-weight:500;color:var(--text-secondary);text-decoration:none;
-            padding:6px 12px;border:1px solid var(--border-std);border-radius:var(--radius-md);
-            background:var(--bg-button);transition:all .2s;white-space:nowrap;
-        }
-        .header-link:hover{color:var(--text-primary);background:var(--bg-card-hover)}
         .header-badge{font-size:12px;font-weight:500;color:var(--success);background:var(--success-bg);padding:3px 10px;border-radius:var(--radius-pill);border:1px solid var(--success-bd)}
         .theme-toggle{
             background:var(--bg-button);border:1px solid var(--border-std);border-radius:var(--radius-md);
@@ -264,7 +258,6 @@
         </div>
         <div class="header-meta">
             <span class="header-date">2026/4/27 · WEEK 17</span>
-            <a class="header-link" href="hermes-deploy.html">部署教程</a>
             <span class="header-badge">● Active</span>
             <button class="theme-toggle" onclick="toggleTheme()" title="切换深色/浅色模式"><span class="theme-toggle-icon">◐</span> 深色模式</button>
             <button class="export-btn" onclick="exportImage()" id="exportBtn"><span>📷</span> 导出长图</button>
