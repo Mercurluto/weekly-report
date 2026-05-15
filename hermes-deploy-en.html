@@ -138,7 +138,16 @@
                 <div class="step"><div class="badge">7</div><div><h3>Install Node.js 22</h3><pre>curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs
 node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js is installed.</p></div></div>
-                <div class="step"><div class="badge">8</div><div><h3>Install Hermes Agent</h3><pre>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre><p>After installation, close Ubuntu, reopen it, then run:</p><pre>hermes --version</pre></div></div>
+                <div class="step"><div class="badge">8</div><div><h3>Install Hermes Agent</h3><pre>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
+<div class="callout warn">
+  <p><strong>If you see "Could not resolve host" or the command hangs, try these in order:</strong></p>
+  <p><strong>A. Use a mirror</strong> (recommended, fastest)</p>
+  <pre>curl -fsSL https://ghproxy.net/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
+  <p><strong>B. Check VPN</strong>: If you're using a VPN or corporate proxy, turn it off and retry the original command. Some VPNs block GitHub.</p>
+  <p><strong>C. Edit hosts file</strong>: Paste the command below, enter your password, then retry the original install command.</p>
+  <pre>sudo sh -c 'echo "185.199.108.133 raw.githubusercontent.com" >> /etc/hosts'</pre>
+</div>
+<p>After installation, close Ubuntu, reopen it, then run:</p><pre>hermes --version</pre></div></div>
                 <div class="step"><div class="badge">9</div><div><h3>Configure DeepSeek</h3><pre>hermes setup</pre><p>Choose DeepSeek, paste your API key, use <code>deepseek-chat</code> as the model, and press Enter for default options.</p><div class="callout warn">Important: when Hermes asks for the API key, pasted text is usually hidden. It will not show characters or stars. Paste once, press Enter, and do not paste repeatedly.</div></div></div>
             </div>
 
@@ -149,7 +158,16 @@ node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js i
                 <div class="step"><div class="badge">2</div><div><h3>Check or install Homebrew</h3><pre>brew --version</pre><p>If you see command not found, run:</p><pre>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</pre></div></div>
                 <div class="step"><div class="badge">3</div><div><h3>Install Node.js</h3><pre>brew install node
 node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js is installed.</p></div></div>
-                <div class="step"><div class="badge">4</div><div><h3>Install Hermes Agent</h3><pre>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre><p>After installation, close Terminal, reopen it, then check:</p><pre>hermes --version</pre></div></div>
+                <div class="step"><div class="badge">4</div><div><h3>Install Hermes Agent</h3><pre>curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
+<div class="callout warn">
+  <p><strong>If you see "Could not resolve host" or the command hangs, try these in order:</strong></p>
+  <p><strong>A. Use a mirror</strong> (recommended, fastest)</p>
+  <pre>curl -fsSL https://ghproxy.net/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
+  <p><strong>B. Check VPN</strong>: If you're using a VPN or corporate proxy, turn it off and retry the original command. Some VPNs block GitHub.</p>
+  <p><strong>C. Edit hosts file</strong>: Paste the command below, enter your password, then retry the original install command.</p>
+  <pre>sudo sh -c 'echo "185.199.108.133 raw.githubusercontent.com" >> /etc/hosts'</pre>
+</div>
+<p>After installation, close Terminal, reopen it, then check:</p><pre>hermes --version</pre></div></div>
                 <div class="step"><div class="badge">5</div><div><h3>Configure DeepSeek</h3><pre>hermes setup</pre><p>Choose DeepSeek, paste your API key, and use <code>deepseek-chat</code> as the model.</p><div class="callout warn">Important: Hermes hides API key input. It may look like nothing happened after pasting, but the key is usually already there. Press Enter once.</div></div></div>
             </div>
         </div>
@@ -176,6 +194,20 @@ node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js i
             <details><summary>Q: How do I switch models?</summary><p>Run <code>hermes model</code>, or type <code>/model</code> in chat mode.</p></details>
             <details><summary>Q: How much does DeepSeek cost?</summary><p>Everyday office testing is usually inexpensive. The exact cost depends on how much you use it.</p></details>
             <details><summary>Q: How do WSL and Windows files connect?</summary><p>Inside WSL, Windows files are under <code>/mnt/c/</code>. In Windows File Explorer, open <code>\\wsl$\Ubuntu</code> to browse Ubuntu files.</p></details>
+            <details><summary>Q: I see <code>Could not resolve host</code> or network timeout when installing Hermes?</summary>
+  <p>This is common when accessing GitHub from certain regions. Try one of these four approaches:</p>
+  <p><strong>A. Use a mirror</strong> (recommended, fastest)</p>
+  <pre>curl -fsSL https://ghproxy.net/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
+  <p><strong>B. Use VPN</strong>: If you have a personal VPN, keep it on while running the original command. If using a corporate VPN, try turning it off.</p>
+  <p><strong>C. Edit hosts file</strong></p>
+  <pre>sudo sh -c 'echo "185.199.108.133 raw.githubusercontent.com" >> /etc/hosts'</pre>
+  <p>Enter your Ubuntu/macOS password (characters won't show), then retry the original install command.</p>
+  <p><strong>D. Manual install</strong></p>
+  <p>① Open <code>raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh</code> in your browser<br>
+  ② Select all and copy the page contents<br>
+  ③ In terminal, type <code>nano install.sh</code>, right-click to paste, press <code>Ctrl+X</code> then <code>Y</code> then Enter to save<br>
+  ④ Run <code>bash install.sh</code></p>
+</details>
         </div>
     </section>
 </main>
@@ -183,7 +215,7 @@ node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js i
 <footer class="footer">
     <div class="wrap">
         <span>Maintained by Milo</span>
-        <span>Last updated: May 2026</span>
+        <span>Last updated: May 2026 (updated)</span>
         <span>Hermes Agent by Nous Research</span>
     </div>
 </footer>
