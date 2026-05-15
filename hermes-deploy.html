@@ -143,9 +143,18 @@ node --version</pre><p>看到类似 <code>v22.x.x</code> 就说明成功。</p><
   <p><strong>如果提示 Could not resolve host 或长时间卡住不动，依次尝试：</strong></p>
   <p><strong>A. 换镜像地址</strong>（推荐，最快）</p>
   <pre>curl -fsSL https://ghproxy.net/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
-  <p><strong>B. 检查 VPN</strong>：如果你开了 VPN 或公司代理，先关掉再重试原命令。部分 VPN 会拦截 GitHub。</p>
-  <p><strong>C. 修改 hosts</strong>：在终端粘贴以下命令，输入密码确认，然后重新执行原安装命令。</p>
-  <pre>sudo sh -c 'echo "185.199.108.133 raw.githubusercontent.com" >> /etc/hosts'</pre>
+  <p><strong>B. 为终端配置 HTTP 代理</strong>（如果你已运行 Clash / V2Ray 等 VPN，它们通常监听 7890 端口）</p>
+  <pre>export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890</pre>
+  <p>执行安装命令后，如需取消代理，运行 <code>unset https_proxy http_proxy</code>。</p>
+  <p><strong>C. 修改 hosts 文件</strong></p>
+  <pre>sudo nano /etc/hosts</pre>
+  <p>在文件末尾添加以下内容，然后 <code>Ctrl+O</code> 回车保存，<code>Ctrl+X</code> 退出：</p>
+  <pre>185.199.108.133 raw.githubusercontent.com
+185.199.109.133 raw.githubusercontent.com
+185.199.110.133 raw.githubusercontent.com
+185.199.111.133 raw.githubusercontent.com</pre>
+  <p>保存后重新执行原安装命令。</p>
 </div>
 <p>安装完关闭 Ubuntu 窗口，重新打开，再运行：</p><pre>hermes --version</pre></div></div>
                 <div class="step"><div class="badge">9</div><div><h3>配置 DeepSeek</h3><pre>hermes setup</pre><p>选择 DeepSeek，粘贴 API Key，模型推荐 <code>deepseek-chat</code>，其余选项直接回车使用默认。</p><div class="callout warn">重点：Hermes 要你输入 API Key 时，粘贴后终端通常不会显示任何字符，也不会显示星号。粘贴一次后直接按回车，不要反复粘贴。</div></div></div>
@@ -163,9 +172,18 @@ node --version</pre><p>看到类似 <code>v22.x.x</code> 就说明成功。</p><
   <p><strong>如果提示 Could not resolve host 或长时间卡住不动，依次尝试：</strong></p>
   <p><strong>A. 换镜像地址</strong>（推荐，最快）</p>
   <pre>curl -fsSL https://ghproxy.net/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
-  <p><strong>B. 检查 VPN</strong>：如果你开了 VPN 或公司代理，先关掉再重试原命令。部分 VPN 会拦截 GitHub。</p>
-  <p><strong>C. 修改 hosts</strong>：在终端粘贴以下命令，输入密码确认，然后重新执行原安装命令。</p>
-  <pre>sudo sh -c 'echo "185.199.108.133 raw.githubusercontent.com" >> /etc/hosts'</pre>
+  <p><strong>B. 为终端配置 HTTP 代理</strong>（如果你已运行 Clash / V2Ray 等 VPN，它们通常监听 7890 端口）</p>
+  <pre>export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890</pre>
+  <p>执行安装命令后，如需取消代理，运行 <code>unset https_proxy http_proxy</code>。</p>
+  <p><strong>C. 修改 hosts 文件</strong></p>
+  <pre>sudo nano /etc/hosts</pre>
+  <p>在文件末尾添加以下内容，然后 <code>Ctrl+O</code> 回车保存，<code>Ctrl+X</code> 退出：</p>
+  <pre>185.199.108.133 raw.githubusercontent.com
+185.199.109.133 raw.githubusercontent.com
+185.199.110.133 raw.githubusercontent.com
+185.199.111.133 raw.githubusercontent.com</pre>
+  <p>保存后重新执行原安装命令。</p>
 </div>
 <p>安装完成后关闭终端重新打开，再检查：</p><pre>hermes --version</pre></div></div>
                 <div class="step"><div class="badge">5</div><div><h3>配置 DeepSeek</h3><pre>hermes setup</pre><p>选择 DeepSeek，粘贴 API Key，模型推荐 <code>deepseek-chat</code>。</p><div class="callout warn">重点：Hermes 输入 API Key 时不回显。粘贴后看起来像没反应，但通常已经输入成功，直接按回车。</div></div></div>
@@ -198,15 +216,22 @@ node --version</pre><p>看到类似 <code>v22.x.x</code> 就说明成功。</p><
   <p>这是国内访问 GitHub 的常见问题，以下四种方案任选一个：</p>
   <p><strong>A. 换镜像地址</strong>（推荐，最快）</p>
   <pre>curl -fsSL https://ghproxy.net/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
-  <p><strong>B. 使用 VPN</strong>：如果你有个人 VPN，开着 VPN 执行原命令；如果是公司 VPN，关掉它试试。</p>
+  <p><strong>B. 为终端配置 HTTP 代理</strong>（如果你已运行 Clash / V2Ray 等 VPN）</p>
+  <pre>export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890</pre>
+  <p>执行安装命令后，如需取消代理：<code>unset https_proxy http_proxy</code>。</p>
   <p><strong>C. 修改 hosts 文件</strong></p>
-  <pre>sudo sh -c 'echo "185.199.108.133 raw.githubusercontent.com" >> /etc/hosts'</pre>
-  <p>输入 Ubuntu/macOS 密码确认（不会显示字符），然后重新执行原安装命令。</p>
+  <pre>sudo nano /etc/hosts</pre>
+  <p>在文件末尾添加：</p>
+  <pre>185.199.108.133 raw.githubusercontent.com
+185.199.109.133 raw.githubusercontent.com
+185.199.110.133 raw.githubusercontent.com
+185.199.111.133 raw.githubusercontent.com</pre>
+  <p><code>Ctrl+O</code> 回车保存，<code>Ctrl+X</code> 退出。然后重新执行原安装命令。</p>
   <p><strong>D. 手动下载安装</strong></p>
-  <p>① 浏览器打开 <code>raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh</code><br>
-  ② 全选复制页面里的所有内容<br>
-  ③ 终端输入 <code>nano install.sh</code>，右键粘贴，按 <code>Ctrl+X</code> 再按 <code>Y</code> 回车保存<br>
-  ④ 执行 <code>bash install.sh</code></p>
+  <p>① 浏览器直接打开 <a href="https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh" target="_blank">install.sh</a>，右键另存为 <code>install.sh</code><br>
+  ② 或全选复制页面内容 → 终端输入 <code>nano install.sh</code> → 右键粘贴 → <code>Ctrl+X</code> 再 <code>Y</code> 回车保存<br>
+  ③ 执行 <code>bash install.sh</code></p>
 </details>
         </div>
     </section>

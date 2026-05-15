@@ -143,9 +143,18 @@ node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js i
   <p><strong>If you see "Could not resolve host" or the command hangs, try these in order:</strong></p>
   <p><strong>A. Use a mirror</strong> (recommended, fastest)</p>
   <pre>curl -fsSL https://ghproxy.net/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
-  <p><strong>B. Check VPN</strong>: If you're using a VPN or corporate proxy, turn it off and retry the original command. Some VPNs block GitHub.</p>
-  <p><strong>C. Edit hosts file</strong>: Paste the command below, enter your password, then retry the original install command.</p>
-  <pre>sudo sh -c 'echo "185.199.108.133 raw.githubusercontent.com" >> /etc/hosts'</pre>
+  <p><strong>B. Configure HTTP proxy for terminal</strong> (if you're running Clash / V2Ray, they usually listen on port 7890)</p>
+  <pre>export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890</pre>
+  <p>After installation, run <code>unset https_proxy http_proxy</code> to disable the proxy.</p>
+  <p><strong>C. Edit hosts file</strong></p>
+  <pre>sudo nano /etc/hosts</pre>
+  <p>Add the following lines at the end, then <code>Ctrl+O</code> Enter to save, <code>Ctrl+X</code> to exit:</p>
+  <pre>185.199.108.133 raw.githubusercontent.com
+185.199.109.133 raw.githubusercontent.com
+185.199.110.133 raw.githubusercontent.com
+185.199.111.133 raw.githubusercontent.com</pre>
+  <p>After saving, retry the original install command.</p>
 </div>
 <p>After installation, close Ubuntu, reopen it, then run:</p><pre>hermes --version</pre></div></div>
                 <div class="step"><div class="badge">9</div><div><h3>Configure DeepSeek</h3><pre>hermes setup</pre><p>Choose DeepSeek, paste your API key, use <code>deepseek-chat</code> as the model, and press Enter for default options.</p><div class="callout warn">Important: when Hermes asks for the API key, pasted text is usually hidden. It will not show characters or stars. Paste once, press Enter, and do not paste repeatedly.</div></div></div>
@@ -163,9 +172,18 @@ node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js i
   <p><strong>If you see "Could not resolve host" or the command hangs, try these in order:</strong></p>
   <p><strong>A. Use a mirror</strong> (recommended, fastest)</p>
   <pre>curl -fsSL https://ghproxy.net/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
-  <p><strong>B. Check VPN</strong>: If you're using a VPN or corporate proxy, turn it off and retry the original command. Some VPNs block GitHub.</p>
-  <p><strong>C. Edit hosts file</strong>: Paste the command below, enter your password, then retry the original install command.</p>
-  <pre>sudo sh -c 'echo "185.199.108.133 raw.githubusercontent.com" >> /etc/hosts'</pre>
+  <p><strong>B. Configure HTTP proxy for terminal</strong> (if you're running Clash / V2Ray, they usually listen on port 7890)</p>
+  <pre>export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890</pre>
+  <p>After installation, run <code>unset https_proxy http_proxy</code> to disable the proxy.</p>
+  <p><strong>C. Edit hosts file</strong></p>
+  <pre>sudo nano /etc/hosts</pre>
+  <p>Add the following lines at the end, then <code>Ctrl+O</code> Enter to save, <code>Ctrl+X</code> to exit:</p>
+  <pre>185.199.108.133 raw.githubusercontent.com
+185.199.109.133 raw.githubusercontent.com
+185.199.110.133 raw.githubusercontent.com
+185.199.111.133 raw.githubusercontent.com</pre>
+  <p>After saving, retry the original install command.</p>
 </div>
 <p>After installation, close Terminal, reopen it, then check:</p><pre>hermes --version</pre></div></div>
                 <div class="step"><div class="badge">5</div><div><h3>Configure DeepSeek</h3><pre>hermes setup</pre><p>Choose DeepSeek, paste your API key, and use <code>deepseek-chat</code> as the model.</p><div class="callout warn">Important: Hermes hides API key input. It may look like nothing happened after pasting, but the key is usually already there. Press Enter once.</div></div></div>
@@ -198,15 +216,22 @@ node --version</pre><p>If you see something like <code>v22.x.x</code>, Node.js i
   <p>This is common when accessing GitHub from certain regions. Try one of these four approaches:</p>
   <p><strong>A. Use a mirror</strong> (recommended, fastest)</p>
   <pre>curl -fsSL https://ghproxy.net/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</pre>
-  <p><strong>B. Use VPN</strong>: If you have a personal VPN, keep it on while running the original command. If using a corporate VPN, try turning it off.</p>
+  <p><strong>B. Configure HTTP proxy for terminal</strong> (if you're running Clash / V2Ray)</p>
+  <pre>export https_proxy=http://127.0.0.1:7890
+export http_proxy=http://127.0.0.1:7890</pre>
+  <p>After installation: <code>unset https_proxy http_proxy</code>.</p>
   <p><strong>C. Edit hosts file</strong></p>
-  <pre>sudo sh -c 'echo "185.199.108.133 raw.githubusercontent.com" >> /etc/hosts'</pre>
-  <p>Enter your Ubuntu/macOS password (characters won't show), then retry the original install command.</p>
+  <pre>sudo nano /etc/hosts</pre>
+  <p>Add at the end:</p>
+  <pre>185.199.108.133 raw.githubusercontent.com
+185.199.109.133 raw.githubusercontent.com
+185.199.110.133 raw.githubusercontent.com
+185.199.111.133 raw.githubusercontent.com</pre>
+  <p><code>Ctrl+O</code> Enter to save, <code>Ctrl+X</code> to exit. Then retry the original install command.</p>
   <p><strong>D. Manual install</strong></p>
-  <p>① Open <code>raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh</code> in your browser<br>
-  ② Select all and copy the page contents<br>
-  ③ In terminal, type <code>nano install.sh</code>, right-click to paste, press <code>Ctrl+X</code> then <code>Y</code> then Enter to save<br>
-  ④ Run <code>bash install.sh</code></p>
+  <p>① Open <a href="https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh" target="_blank">install.sh</a> in your browser, right-click and save as <code>install.sh</code><br>
+  ② Or copy all content → in terminal, type <code>nano install.sh</code> → right-click paste → <code>Ctrl+X</code> then <code>Y</code> Enter to save<br>
+  ③ Run <code>bash install.sh</code></p>
 </details>
         </div>
     </section>
